@@ -80,4 +80,12 @@ const getUserProfile = async (req, res) => {
     }
 };
 
-module.exports = { authUser, registerUser, getUserProfile };
+// @desc    Get all users
+// @route   GET /api/auth/users
+// @access  Private/Admin
+const getUsers = async (req, res) => {
+    const users = await User.find({});
+    res.json(users);
+};
+
+module.exports = { authUser, registerUser, getUserProfile, getUsers };

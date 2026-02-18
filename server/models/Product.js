@@ -27,7 +27,9 @@ const productSchema = new mongoose.Schema({
     rating: { type: Number, required: true, default: 0 },
     numReviews: { type: Number, required: true, default: 0 },
     price: { type: Number, required: true, default: 0 },
+    discount: { type: Number, required: true, default: 0 }, // Percentage off (0-100)
     countInStock: { type: Number, required: true, default: 0 },
+    isActive: { type: Boolean, required: true, default: true },
     firmness: { type: String, required: true }, // e.g., Soft, Medium, Firm
     size: { type: String, required: true }, // e.g., Queen, King
     features: [{ type: String }],
