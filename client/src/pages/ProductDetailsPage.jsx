@@ -1,0 +1,153 @@
+
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import axios from 'axios';
+import { CartContext } from '../context/CartContext';
+import { AuthContext } from '../context/AuthContext';
+import { FaStar } from 'react-icons/fa';
+
+const ProductDetailsPage = () => {
+    const { id } = useParams();
+    const [product, setProduct] = useState(null);
+    const [qty, setQty] = useState(1);
+    const [rating, setRating] = useState(5);
+    const [comment, setComment] = useState('');
+
+    const { addToCart } = useContext(CartContext);
+    const { user } = useContext(AuthContext);
+
+    useEffect(() => {
+        const fetchProduct = async () => {
+            const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+            setProduct(data);
+        };
+        fetchProduct();
+    }, [id]);
+
+    const submitReviewHandler = async (e) => {
+        e.preventDefault();
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
+            await axios.post(
+                `http://localhost:5000/api/products/${id}/reviews`,
+                { rating, comment },
+                config
+            );
+            alert('Review Submitted!');
+            // Reload product to show new review
+            const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+            setProduct(data);
+            setComment('');
+        } catch (error) {
+            alert(error.response.data.message);
+        }
+    };
+
+    if (!product) return <div>Loading...</div>;
+
+    return (
+        <div className="container mx-auto p-4">
+            <Link to="/shop" className="text-blue-600 hover:underline mb-4 inline-block">Back to Shop</Link>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <img src={product.image} alt={product.name} className="w-full rounded shadow-lg" />
+                </div>
+                <div>
+                    <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
+                    <div className="flex items-center mb-4">
+                        <span className="text-yellow-500 mr-2 flex items-center text-xl">
+                            {product.rating} <FaStar className="ml-1" />
+                        </span>
+                        <span>({product.numReviews} reviews)</span>
+                    </div>
+                    <p className="text-2xl font-bold mb-4">${product.price}</p>
+                    <p className="mb-6">{product.description}</p>
+
+                    <div className="mb-4">
+                        <strong>Firmness:</strong> {product.firmness}
+                    </div>
+                    <div className="mb-6">
+                        <strong>Size:</strong> {product.size}
+                    </div>
+
+                    <div className="flex items-center space-x-4 mb-6">
+                        <select
+                            value={qty}
+                            onChange={(e) => setQty(Number(e.target.value))}
+                            className="border p-2 rounded"
+                        >
+                            {[...Array(product.countInStock > 0 ? product.countInStock : 0).keys()].map((x) => (
+                                <option key={x + 1} value={x + 1}>
+                                    {x + 1}
+                                </option>
+                            ))}
+                        </select>
+                        <button
+                            onClick={() => addToCart(product, qty)}
+                            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+                            disabled={product.countInStock === 0}
+                        >
+                            {product.countInStock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mt-12">
+                <h2 className="text-2xl font-bold mb-4">Reviews</h2>
+                {product.reviews.length === 0 && <div className="text-gray-600">No reviews yet</div>}
+                <div className="space-y-4">
+                    {product.reviews.map((review) => (
+                        <div key={review._id} className="bg-gray-100 p-4 rounded">
+                            <div className="flex items-center justify-between mb-2">
+                                <strong>{review.name}</strong>
+                                <span className="text-yellow-500 flex items-center">{review.rating} <FaStar /></span>
+                            </div>
+                            <p>{review.comment}</p>
+                            <p className="text-sm text-gray-500 mt-2">{review.createdAt.substring(0, 10)}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="mt-8 bg-gray-50 p-6 rounded">
+                    <h3 className="text-xl font-bold mb-4">Write a Customer Review</h3>
+                    {user ? (
+                        <form onSubmit={submitReviewHandler}>
+                            <div className="mb-4">
+                                <label className="block mb-2">Rating</label>
+                                <select value={rating} onChange={(e) => setRating(e.target.value)} className="w-full border p-2 rounded">
+                                    <option value="1">1 - Poor</option>
+                                    <option value="2">2 - Fair</option>
+                                    <option value="3">3 - Good</option>
+                                    <option value="4">4 - Very Good</option>
+                                    <option value="5">5 - Excellent</option>
+                                </select>
+                            </div>
+                            <div className="mb-4">
+                                <label className="block mb-2">Comment</label>
+                                <textarea
+                                    value={comment}
+                                    onChange={(e) => setComment(e.target.value)}
+                                    className="w-full border p-2 rounded h-24"
+                                    required
+                                ></textarea>
+                            </div>
+                            <button type="submit" className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800">
+                                Submit Review
+                            </button>
+                        </form>
+                    ) : (
+                        <div className="text-red-500">Please <Link to="/login" className="underline">sign in</Link> to write a review.</div>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ProductDetailsPage;
