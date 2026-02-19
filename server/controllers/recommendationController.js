@@ -7,6 +7,7 @@ const Product = require('../models/Product');
 // @access  Private
 const generateRecommendation = async (req, res) => {
     try {
+        console.log('Incoming Questionnaire Data:', req.body);
         const {
             age,
             weight,
@@ -67,7 +68,9 @@ const generateRecommendation = async (req, res) => {
         }
 
         // Find products matching basic criteria
+        console.log('Recommendation Query:', query);
         let products = await Product.find(query);
+        console.log(`Found ${products.length} products with initial query.`);
 
         // FALLBACK 1: If no products found with exact size, try without size constraint
         if (products.length === 0 && query.size) {
@@ -103,7 +106,7 @@ const generateRecommendation = async (req, res) => {
             // Temperature match
             if (
                 temperaturePreference === 'Cool' &&
-                (p.features.includes('Cooling') || p.features.includes('Cooling Gel') || p.category === 'Cooling')
+                ((p.features && (p.features.includes('Cooling') || p.features.includes('Cooling Gel'))) || p.category === 'Cooling')
             ) {
                 score += 15;
                 reasons.push('Cooling technology included');
@@ -116,7 +119,7 @@ const generateRecommendation = async (req, res) => {
             }
 
             // Partner match
-            if (hasPartner && p.features.includes('Motion Isolation')) {
+            if (hasPartner && p.features && p.features.includes('Motion Isolation')) {
                 score += 10;
                 reasons.push('Motion isolation for couples');
             }

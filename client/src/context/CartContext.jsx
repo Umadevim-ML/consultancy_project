@@ -17,22 +17,22 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }, [cartItems]);
 
-    const addToCart = (product, qty) => {
-        const existItem = cartItems.find((x) => x.product === product._id);
+    const addToCart = (product, qty, size = 'Queen (78" x 60")') => {
+        const existItem = cartItems.find((x) => x.product === product._id && x.size === size);
 
         if (existItem) {
             setCartItems(
                 cartItems.map((x) =>
-                    x.product === product._id ? { ...existItem, qty: existItem.qty + qty } : x
+                    x.product === product._id && x.size === size ? { ...existItem, qty: existItem.qty + qty } : x
                 )
             );
         } else {
-            setCartItems([...cartItems, { ...product, product: product._id, qty }]);
+            setCartItems([...cartItems, { ...product, product: product._id, qty, size }]);
         }
     };
 
-    const removeFromCart = (id) => {
-        setCartItems(cartItems.filter((x) => x.product !== id));
+    const removeFromCart = (id, size) => {
+        setCartItems(cartItems.filter((x) => !(x.product === id && x.size === size)));
     };
 
     const clearCart = () => {

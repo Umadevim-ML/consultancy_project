@@ -48,6 +48,16 @@ const ProductDetailsPage = () => {
         }
     };
 
+    const [size, setSize] = useState('Queen (78" x 60")');
+
+    const sizes = [
+        'Single (72" x 36")',
+        'Diwan (72" x 48")',
+        'Queen (78" x 60")',
+        'King (78" x 72")',
+        'California King (84" x 72")',
+    ];
+
     if (!product) return <div>Loading...</div>;
 
     return (
@@ -65,31 +75,46 @@ const ProductDetailsPage = () => {
                         </span>
                         <span>({product.numReviews} reviews)</span>
                     </div>
-                    <p className="text-2xl font-bold mb-4">${product.price}</p>
+                    <p className="text-2xl font-bold mb-4">₹{product.price}</p>
                     <p className="mb-6">{product.description}</p>
 
                     <div className="mb-4">
                         <strong>Firmness:</strong> {product.firmness}
                     </div>
-                    <div className="mb-6">
-                        <strong>Size:</strong> {product.size}
-                    </div>
 
-                    <div className="flex items-center space-x-4 mb-6">
+                    <div className="mb-4">
+                        <label className="block font-bold mb-2">Select Size:</label>
                         <select
-                            value={qty}
-                            onChange={(e) => setQty(Number(e.target.value))}
-                            className="border p-2 rounded"
+                            value={size}
+                            onChange={(e) => setSize(e.target.value)}
+                            className="border p-2 rounded w-full md:w-64"
                         >
-                            {[...Array(product.countInStock > 0 ? product.countInStock : 0).keys()].map((x) => (
-                                <option key={x + 1} value={x + 1}>
-                                    {x + 1}
+                            {sizes.map((s) => (
+                                <option key={s} value={s}>
+                                    {s}
                                 </option>
                             ))}
                         </select>
+                    </div>
+
+                    <div className="flex items-center space-x-4 mb-6">
+                        <div className="flex flex-col">
+                            <label className="text-xs font-bold mb-1">Quantity:</label>
+                            <select
+                                value={qty}
+                                onChange={(e) => setQty(Number(e.target.value))}
+                                className="border p-2 rounded"
+                            >
+                                {[...Array(product.countInStock > 0 ? product.countInStock : 0).keys()].map((x) => (
+                                    <option key={x + 1} value={x + 1}>
+                                        {x + 1}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                         <button
-                            onClick={() => addToCart(product, qty)}
-                            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+                            onClick={() => addToCart(product, qty, size)}
+                            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 disabled:opacity-50 mt-5"
                             disabled={product.countInStock === 0}
                         >
                             {product.countInStock === 0 ? 'Out of Stock' : 'Add to Cart'}

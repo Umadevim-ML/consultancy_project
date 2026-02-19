@@ -1,0 +1,301 @@
+age,weight,height,sleepPosition,backPain,shoulderPain,firmnessPreference,temperaturePreference,hasPartner,recommendedCategory
+63,59,194,Combination,0,0,Soft,Cool,1,Hybrid
+33,104,176,Combination,1,0,Soft,Warm,0,Orthopedic
+51,103,191,Side,1,0,Extra Firm,Warm,1,Orthopedic
+43,71,160,Back,1,1,Soft,Warm,1,Orthopedic
+43,107,159,Stomach,1,0,Firm,Warm,0,Orthopedic
+28,70,181,Side,1,0,Medium,Warm,0,Orthopedic
+48,112,150,Combination,1,0,Medium,Cool,0,Orthopedic
+38,120,186,Back,0,0,Medium,Warm,0,Orthopedic
+28,98,160,Stomach,1,0,Soft,Cool,0,Orthopedic
+43,92,161,Stomach,1,0,Medium,Cool,1,Orthopedic
+26,92,165,Combination,0,1,Soft,Normal,0,Orthopedic
+39,88,157,Combination,0,0,Extra Firm,Warm,1,Latex
+43,81,158,Stomach,0,1,Medium,Cool,0,Memory Foam
+29,102,158,Side,0,0,Soft,Normal,1,Orthopedic
+40,63,150,Side,1,1,Extra Firm,Normal,0,Orthopedic
+37,90,185,Back,1,0,Medium,Normal,0,Orthopedic
+23,57,158,Side,1,0,Extra Firm,Normal,1,Orthopedic
+59,82,176,Back,0,0,Soft,Cool,0,Memory Foam
+69,72,155,Stomach,0,0,Medium,Cool,0,Latex
+42,70,160,Combination,1,1,Medium,Cool,0,Orthopedic
+35,95,183,Stomach,1,1,Soft,Warm,0,Orthopedic
+19,120,187,Side,0,1,Soft,Cool,0,Orthopedic
+59,75,188,Side,0,1,Medium,Warm,1,Memory Foam
+39,69,179,Stomach,1,0,Soft,Warm,0,Orthopedic
+69,71,179,Stomach,0,0,Extra Firm,Cool,1,Latex
+28,114,154,Stomach,0,1,Firm,Normal,1,Orthopedic
+65,60,161,Back,1,1,Extra Firm,Normal,0,Orthopedic
+46,88,187,Stomach,0,0,Extra Firm,Cool,1,Hybrid
+35,56,171,Stomach,1,1,Firm,Cool,1,Orthopedic
+27,109,172,Back,1,1,Soft,Warm,0,Orthopedic
+37,50,189,Side,0,0,Firm,Warm,0,Memory Foam
+23,97,172,Stomach,1,0,Firm,Cool,1,Orthopedic
+31,71,184,Back,1,1,Soft,Cool,0,Orthopedic
+42,113,186,Back,1,0,Soft,Warm,1,Orthopedic
+22,78,166,Side,1,0,Firm,Cool,0,Orthopedic
+29,76,192,Back,0,1,Extra Firm,Normal,1,Memory Foam
+65,90,159,Back,1,0,Soft,Normal,1,Orthopedic
+37,108,164,Side,1,1,Extra Firm,Warm,0,Orthopedic
+62,111,167,Back,1,1,Extra Firm,Normal,0,Orthopedic
+46,81,195,Side,0,0,Medium,Normal,1,Memory Foam
+29,72,154,Combination,1,1,Soft,Cool,1,Orthopedic
+34,106,172,Combination,1,1,Soft,Normal,1,Orthopedic
+52,102,169,Stomach,1,1,Soft,Normal,1,Orthopedic
+49,58,160,Combination,1,0,Firm,Warm,0,Orthopedic
+40,90,187,Back,0,1,Firm,Cool,0,Memory Foam
+53,108,161,Combination,0,0,Soft,Cool,1,Orthopedic
+25,107,177,Combination,1,0,Medium,Normal,0,Orthopedic
+58,99,191,Back,0,1,Firm,Warm,1,Orthopedic
+41,106,181,Back,0,0,Firm,Normal,1,Orthopedic
+50,58,175,Stomach,0,0,Medium,Cool,0,Latex
+28,54,159,Stomach,0,1,Soft,Warm,0,Memory Foam
+50,82,173,Combination,0,1,Medium,Warm,0,Memory Foam
+69,66,170,Back,1,0,Medium,Normal,0,Orthopedic
+44,84,165,Combination,0,0,Firm,Warm,1,Hybrid
+33,57,165,Stomach,1,0,Firm,Warm,1,Orthopedic
+63,88,184,Side,0,1,Soft,Cool,1,Memory Foam
+66,67,181,Combination,0,0,Soft,Warm,0,Latex
+55,53,154,Stomach,0,0,Firm,Cool,1,Orthopedic
+30,82,156,Combination,1,1,Extra Firm,Warm,1,Orthopedic
+48,79,155,Side,1,1,Firm,Normal,1,Orthopedic
+25,81,156,Combination,0,1,Soft,Normal,0,Memory Foam
+37,72,191,Stomach,1,0,Extra Firm,Normal,1,Orthopedic
+55,118,163,Back,1,0,Soft,Cool,0,Orthopedic
+43,66,176,Back,0,0,Extra Firm,Warm,0,Memory Foam
+34,110,183,Stomach,1,1,Medium,Warm,1,Orthopedic
+42,67,180,Combination,0,1,Firm,Warm,0,Memory Foam
+58,81,174,Stomach,0,0,Soft,Warm,0,Hybrid
+55,78,169,Combination,1,0,Medium,Warm,0,Orthopedic
+46,50,192,Side,0,0,Soft,Warm,0,Memory Foam
+43,69,188,Stomach,0,1,Firm,Warm,0,Memory Foam
+21,78,180,Stomach,1,1,Extra Firm,Cool,0,Orthopedic
+46,72,190,Combination,1,1,Medium,Normal,0,Orthopedic
+43,98,159,Combination,0,0,Extra Firm,Normal,1,Orthopedic
+42,97,154,Stomach,1,0,Firm,Normal,1,Orthopedic
+68,87,171,Combination,1,1,Extra Firm,Warm,1,Orthopedic
+39,75,174,Side,1,1,Firm,Warm,0,Orthopedic
+51,62,151,Back,1,0,Firm,Warm,1,Orthopedic
+63,85,164,Side,1,0,Firm,Cool,0,Orthopedic
+19,102,160,Stomach,0,0,Firm,Cool,1,Orthopedic
+23,100,169,Back,0,1,Soft,Warm,0,Orthopedic
+57,71,171,Back,1,1,Extra Firm,Cool,0,Orthopedic
+43,72,176,Back,0,0,Medium,Normal,0,Hybrid
+48,81,195,Combination,0,0,Soft,Normal,1,Hybrid
+45,108,174,Side,0,1,Medium,Warm,1,Orthopedic
+53,63,159,Side,1,1,Soft,Warm,0,Orthopedic
+57,114,194,Stomach,0,1,Extra Firm,Warm,1,Orthopedic
+43,114,176,Side,0,1,Extra Firm,Normal,1,Orthopedic
+58,84,157,Side,0,1,Medium,Warm,0,Memory Foam
+44,50,166,Back,0,1,Extra Firm,Normal,1,Memory Foam
+35,72,176,Back,1,1,Extra Firm,Normal,1,Orthopedic
+44,73,179,Back,1,0,Medium,Normal,1,Orthopedic
+60,83,166,Stomach,0,0,Firm,Warm,1,Hybrid
+39,65,150,Combination,1,0,Firm,Normal,1,Orthopedic
+57,78,173,Stomach,1,0,Soft,Cool,1,Orthopedic
+25,60,165,Back,1,0,Firm,Normal,0,Orthopedic
+43,86,177,Back,1,1,Firm,Cool,0,Orthopedic
+68,60,186,Stomach,1,1,Medium,Cool,0,Orthopedic
+54,50,185,Back,0,1,Extra Firm,Cool,0,Memory Foam
+23,67,194,Stomach,0,1,Medium,Cool,1,Memory Foam
+52,55,150,Combination,1,1,Soft,Normal,1,Orthopedic
+69,58,195,Combination,0,0,Extra Firm,Normal,0,Latex
+46,87,181,Side,1,0,Firm,Warm,0,Orthopedic
+33,119,156,Side,0,1,Soft,Cool,0,Orthopedic
+59,74,185,Side,1,0,Extra Firm,Cool,1,Orthopedic
+22,120,183,Stomach,1,0,Firm,Warm,1,Orthopedic
+57,106,179,Combination,0,0,Firm,Normal,1,Orthopedic
+19,105,186,Side,1,0,Medium,Normal,0,Orthopedic
+24,76,180,Stomach,0,1,Soft,Normal,0,Memory Foam
+54,82,158,Side,1,1,Extra Firm,Cool,1,Orthopedic
+31,89,174,Back,1,1,Medium,Cool,0,Orthopedic
+33,65,180,Combination,1,0,Firm,Normal,1,Orthopedic
+54,64,151,Back,1,0,Medium,Normal,0,Orthopedic
+55,63,176,Combination,1,1,Soft,Cool,0,Orthopedic
+18,106,169,Side,0,0,Extra Firm,Normal,0,Orthopedic
+21,102,170,Combination,0,1,Extra Firm,Normal,0,Orthopedic
+35,104,152,Side,1,1,Soft,Normal,0,Orthopedic
+34,89,168,Side,0,0,Firm,Warm,0,Memory Foam
+36,93,173,Back,0,0,Medium,Normal,1,Orthopedic
+54,60,162,Stomach,1,1,Extra Firm,Warm,1,Orthopedic
+23,118,192,Stomach,0,1,Extra Firm,Normal,1,Orthopedic
+45,92,163,Back,1,1,Medium,Warm,1,Orthopedic
+33,71,187,Combination,1,0,Extra Firm,Cool,1,Orthopedic
+64,80,157,Side,0,0,Soft,Warm,0,Memory Foam
+42,57,190,Back,1,1,Soft,Cool,1,Orthopedic
+19,105,180,Combination,1,1,Extra Firm,Cool,1,Orthopedic
+46,85,183,Back,0,0,Extra Firm,Cool,1,Memory Foam
+66,102,164,Combination,0,1,Firm,Normal,1,Orthopedic
+42,75,160,Side,1,0,Soft,Normal,0,Orthopedic
+47,110,153,Side,0,1,Extra Firm,Warm,0,Orthopedic
+40,110,171,Back,0,1,Firm,Cool,1,Orthopedic
+51,64,155,Back,1,1,Medium,Warm,1,Orthopedic
+69,80,183,Combination,0,1,Extra Firm,Normal,1,Memory Foam
+34,60,159,Stomach,1,0,Extra Firm,Cool,1,Orthopedic
+27,91,195,Side,0,0,Firm,Cool,1,Orthopedic
+62,104,178,Stomach,1,0,Extra Firm,Warm,0,Orthopedic
+22,88,152,Combination,1,0,Extra Firm,Warm,0,Orthopedic
+65,55,181,Combination,0,0,Soft,Normal,1,Memory Foam
+49,103,183,Combination,0,1,Extra Firm,Cool,0,Orthopedic
+19,53,152,Combination,1,0,Firm,Warm,1,Orthopedic
+46,98,170,Side,1,0,Firm,Warm,0,Orthopedic
+40,76,178,Combination,0,1,Soft,Normal,0,Memory Foam
+31,73,178,Side,1,0,Medium,Normal,1,Orthopedic
+41,51,157,Combination,0,1,Firm,Cool,0,Memory Foam
+61,56,163,Back,0,1,Medium,Warm,0,Memory Foam
+52,89,173,Side,1,0,Medium,Cool,1,Orthopedic
+39,98,169,Back,0,0,Extra Firm,Cool,1,Orthopedic
+45,76,166,Back,1,1,Medium,Warm,0,Orthopedic
+29,71,183,Side,0,1,Medium,Warm,0,Memory Foam
+62,97,171,Side,0,0,Firm,Cool,0,Orthopedic
+40,68,192,Back,1,1,Medium,Normal,0,Orthopedic
+21,79,182,Combination,0,1,Soft,Warm,0,Memory Foam
+51,63,191,Back,1,0,Extra Firm,Warm,0,Orthopedic
+59,99,184,Back,1,1,Soft,Normal,1,Orthopedic
+21,66,159,Combination,0,1,Soft,Normal,1,Memory Foam
+38,98,171,Combination,0,1,Soft,Normal,1,Orthopedic
+31,97,187,Back,0,0,Firm,Cool,0,Orthopedic
+26,57,170,Stomach,1,1,Extra Firm,Normal,1,Orthopedic
+63,114,162,Stomach,1,0,Extra Firm,Normal,1,Orthopedic
+56,87,177,Side,1,1,Extra Firm,Normal,1,Orthopedic
+55,113,157,Side,0,0,Extra Firm,Warm,1,Orthopedic
+29,92,170,Stomach,1,0,Soft,Normal,1,Orthopedic
+27,101,151,Side,0,0,Medium,Warm,1,Orthopedic
+51,101,171,Combination,1,0,Soft,Warm,1,Orthopedic
+24,54,187,Stomach,0,1,Extra Firm,Cool,0,Memory Foam
+62,110,153,Combination,0,1,Extra Firm,Cool,1,Orthopedic
+62,79,167,Back,1,1,Extra Firm,Normal,1,Orthopedic
+26,115,170,Side,1,1,Soft,Cool,1,Orthopedic
+31,89,155,Back,0,1,Medium,Cool,0,Memory Foam
+22,83,165,Side,1,0,Medium,Normal,0,Orthopedic
+59,89,157,Stomach,1,0,Extra Firm,Cool,1,Orthopedic
+20,76,183,Stomach,0,0,Medium,Normal,0,Memory Foam
+57,99,194,Back,0,0,Soft,Normal,1,Orthopedic
+67,93,173,Combination,1,1,Soft,Cool,0,Orthopedic
+20,62,164,Back,0,1,Firm,Normal,0,Memory Foam
+55,83,159,Side,0,0,Firm,Cool,1,Memory Foam
+66,101,184,Back,1,1,Extra Firm,Cool,1,Orthopedic
+42,119,179,Side,0,0,Medium,Normal,0,Orthopedic
+53,100,152,Stomach,1,1,Soft,Cool,1,Orthopedic
+65,74,179,Back,1,1,Soft,Cool,1,Orthopedic
+51,67,184,Stomach,0,0,Firm,Warm,1,Orthopedic
+70,112,190,Side,0,0,Medium,Normal,0,Orthopedic
+33,66,178,Back,0,1,Firm,Normal,1,Memory Foam
+63,66,175,Combination,1,0,Soft,Cool,0,Orthopedic
+43,87,188,Combination,1,1,Extra Firm,Normal,0,Orthopedic
+58,93,182,Combination,0,1,Soft,Warm,1,Orthopedic
+29,113,173,Stomach,0,1,Extra Firm,Cool,1,Orthopedic
+48,74,194,Side,0,1,Extra Firm,Normal,0,Memory Foam
+68,93,173,Stomach,0,1,Medium,Cool,0,Orthopedic
+55,102,150,Back,0,0,Firm,Cool,0,Orthopedic
+29,82,168,Combination,1,0,Extra Firm,Normal,1,Orthopedic
+48,101,159,Stomach,0,0,Soft,Cool,0,Orthopedic
+57,81,183,Side,1,0,Medium,Cool,0,Orthopedic
+63,64,183,Back,1,0,Medium,Cool,0,Orthopedic
+22,111,182,Stomach,1,1,Extra Firm,Warm,1,Orthopedic
+48,86,171,Back,1,1,Medium,Warm,0,Orthopedic
+28,112,150,Back,0,0,Extra Firm,Normal,0,Orthopedic
+70,88,175,Stomach,1,1,Firm,Normal,0,Orthopedic
+58,107,164,Back,1,1,Extra Firm,Warm,1,Orthopedic
+68,58,191,Side,1,0,Soft,Normal,1,Orthopedic
+48,59,167,Stomach,1,0,Extra Firm,Cool,1,Orthopedic
+32,82,178,Stomach,1,0,Medium,Cool,1,Orthopedic
+26,60,178,Back,0,1,Medium,Cool,0,Memory Foam
+21,107,156,Back,0,1,Extra Firm,Cool,1,Orthopedic
+69,107,192,Back,0,0,Extra Firm,Cool,1,Orthopedic
+30,105,176,Back,0,1,Medium,Warm,1,Orthopedic
+65,90,158,Stomach,1,1,Medium,Cool,1,Orthopedic
+70,95,184,Back,1,0,Soft,Normal,1,Orthopedic
+40,86,191,Back,0,0,Medium,Normal,1,Memory Foam
+58,120,153,Back,0,1,Extra Firm,Cool,0,Orthopedic
+52,57,168,Side,1,0,Extra Firm,Normal,0,Orthopedic
+35,105,165,Side,0,1,Extra Firm,Cool,0,Orthopedic
+51,55,195,Back,1,1,Medium,Cool,1,Orthopedic
+42,79,180,Back,0,0,Medium,Normal,1,Memory Foam
+49,76,163,Combination,1,1,Medium,Cool,0,Orthopedic
+54,96,180,Side,0,1,Medium,Normal,0,Orthopedic
+50,110,159,Side,0,0,Medium,Cool,0,Orthopedic
+28,87,160,Back,1,1,Firm,Cool,1,Orthopedic
+54,53,183,Combination,1,0,Firm,Normal,0,Orthopedic
+36,74,194,Back,0,0,Medium,Cool,0,Hybrid
+28,90,175,Side,1,0,Firm,Cool,1,Orthopedic
+49,92,193,Side,0,0,Soft,Warm,0,Orthopedic
+62,110,194,Back,0,0,Firm,Normal,1,Orthopedic
+25,110,176,Combination,0,0,Firm,Cool,1,Orthopedic
+45,79,189,Combination,1,1,Soft,Cool,1,Orthopedic
+55,56,161,Stomach,0,1,Extra Firm,Warm,0,Memory Foam
+21,100,181,Stomach,1,1,Soft,Cool,1,Orthopedic
+62,70,174,Back,0,0,Soft,Normal,0,Hybrid
+70,85,177,Side,0,0,Soft,Normal,1,Memory Foam
+52,82,154,Back,1,0,Medium,Cool,1,Orthopedic
+19,59,190,Stomach,1,1,Soft,Normal,1,Orthopedic
+39,119,177,Side,1,0,Extra Firm,Cool,0,Orthopedic
+30,67,172,Stomach,0,1,Medium,Normal,0,Memory Foam
+42,106,179,Back,1,0,Firm,Warm,0,Orthopedic
+70,63,182,Back,0,1,Soft,Cool,0,Memory Foam
+64,58,154,Side,0,0,Extra Firm,Normal,1,Memory Foam
+54,100,169,Stomach,0,1,Medium,Normal,0,Orthopedic
+21,78,166,Combination,0,0,Medium,Normal,1,Hybrid
+47,51,181,Back,1,1,Soft,Cool,1,Orthopedic
+21,89,175,Stomach,0,0,Extra Firm,Normal,0,Orthopedic
+35,68,171,Back,1,0,Soft,Normal,1,Orthopedic
+28,53,189,Side,0,0,Firm,Cool,1,Memory Foam
+35,103,150,Combination,0,0,Extra Firm,Cool,1,Orthopedic
+40,98,159,Combination,1,0,Soft,Warm,0,Orthopedic
+49,117,174,Back,1,1,Firm,Cool,0,Orthopedic
+30,120,179,Back,0,0,Firm,Normal,0,Orthopedic
+56,77,156,Stomach,1,0,Medium,Normal,1,Orthopedic
+26,85,157,Stomach,1,1,Soft,Normal,0,Orthopedic
+34,92,163,Stomach,0,0,Extra Firm,Cool,0,Orthopedic
+58,81,164,Combination,0,0,Soft,Normal,1,Orthopedic
+37,105,192,Back,1,0,Extra Firm,Cool,0,Orthopedic
+67,81,184,Stomach,0,1,Extra Firm,Cool,0,Memory Foam
+59,99,186,Stomach,0,1,Medium,Normal,0,Orthopedic
+56,58,152,Combination,0,1,Extra Firm,Normal,1,Memory Foam
+54,51,193,Stomach,1,0,Medium,Normal,1,Orthopedic
+50,92,153,Side,0,0,Extra Firm,Warm,0,Orthopedic
+47,55,176,Side,1,0,Medium,Warm,1,Orthopedic
+34,50,172,Stomach,1,1,Firm,Normal,0,Orthopedic
+24,55,162,Stomach,1,0,Firm,Cool,1,Orthopedic
+64,78,194,Back,1,0,Medium,Warm,1,Orthopedic
+69,108,188,Back,1,1,Medium,Cool,1,Orthopedic
+63,117,183,Back,0,1,Medium,Warm,1,Orthopedic
+53,109,187,Back,0,0,Soft,Warm,1,Orthopedic
+58,114,160,Side,1,0,Soft,Cool,1,Orthopedic
+50,105,183,Combination,0,0,Extra Firm,Cool,1,Orthopedic
+21,105,152,Back,0,0,Medium,Normal,1,Orthopedic
+53,112,180,Back,0,0,Soft,Normal,1,Orthopedic
+47,106,166,Side,1,0,Medium,Cool,1,Orthopedic
+27,50,193,Stomach,1,1,Firm,Cool,1,Orthopedic
+42,65,160,Side,1,1,Firm,Warm,1,Orthopedic
+20,95,158,Stomach,1,1,Extra Firm,Warm,1,Orthopedic
+36,99,187,Back,1,1,Firm,Normal,1,Orthopedic
+34,91,153,Combination,1,1,Medium,Normal,1,Orthopedic
+64,120,189,Combination,0,1,Medium,Normal,0,Orthopedic
+27,81,175,Back,1,0,Extra Firm,Cool,0,Orthopedic
+20,80,160,Back,1,0,Extra Firm,Cool,0,Orthopedic
+38,120,165,Combination,1,1,Extra Firm,Cool,0,Orthopedic
+57,63,174,Stomach,1,1,Firm,Cool,0,Orthopedic
+42,108,194,Side,0,0,Extra Firm,Normal,0,Orthopedic
+49,106,195,Combination,1,0,Firm,Warm,0,Orthopedic
+44,105,173,Stomach,1,0,Soft,Warm,0,Orthopedic
+34,86,153,Back,1,1,Firm,Cool,1,Orthopedic
+23,116,182,Side,0,0,Soft,Cool,1,Orthopedic
+61,112,159,Stomach,1,1,Extra Firm,Normal,1,Orthopedic
+47,104,176,Side,0,1,Extra Firm,Normal,0,Orthopedic
+40,75,191,Side,0,0,Extra Firm,Normal,1,Memory Foam
+48,117,192,Back,1,1,Soft,Normal,0,Orthopedic
+26,118,184,Back,1,0,Medium,Cool,0,Orthopedic
+26,84,195,Stomach,0,0,Firm,Normal,0,Latex
+59,52,174,Stomach,0,0,Soft,Warm,0,Memory Foam
+42,92,175,Back,0,0,Medium,Cool,0,Orthopedic
+32,116,160,Combination,1,1,Soft,Warm,1,Orthopedic
+28,100,194,Stomach,1,0,Soft,Cool,1,Orthopedic
+60,84,176,Side,0,1,Firm,Cool,0,Memory Foam
+44,100,166,Back,0,1,Soft,Normal,1,Orthopedic
+44,58,153,Back,1,0,Firm,Normal,0,Orthopedic
+37,111,163,Stomach,1,1,Soft,Normal,1,Orthopedic
+42,63,156,Stomach,0,1,Medium,Warm,0,Memory Foam
+54,100,154,Side,1,1,Medium,Cool,0,Orthopedic
+44,99,173,Side,0,1,Soft,Cool,1,Orthopedic
+49,107,179,Side,0,1,Firm,Warm,0,Orthopedic

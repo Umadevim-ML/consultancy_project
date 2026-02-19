@@ -35,12 +35,13 @@ const CartPage = () => {
                                 <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded" />
                                 <div className="flex-grow ml-4">
                                     <Link to={`/product/${item.product}`} className="text-lg font-bold hover:underline">{item.name}</Link>
-                                    <p className="text-gray-600">${item.price}</p>
+                                    <p className="text-gray-600">₹{item.price}</p>
+                                    <p className="text-sm text-gray-500">Size: {item.size}</p>
                                 </div>
                                 <div className="flex items-center">
                                     <span className="mr-4 font-bold">Qty: {item.qty}</span>
                                     <button
-                                        onClick={() => removeFromCart(item.product)}
+                                        onClick={() => removeFromCart(item.product, item.size)}
                                         className="text-red-500 hover:text-red-700"
                                     >
                                         <FaTrash />
@@ -52,7 +53,7 @@ const CartPage = () => {
                     <div className="md:col-span-1">
                         <div className="bg-white p-6 rounded shadow-md">
                             <h2 className="text-xl font-bold mb-4">Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
-                            <p className="text-2xl font-bold mb-6">${subtotal}</p>
+                            <p className="text-2xl font-bold mb-6">₹{subtotal}</p>
                             <button
                                 onClick={checkoutHandler}
                                 className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transaction"

@@ -20,6 +20,13 @@ import Header from './components/Header';
 import DashboardPage from './pages/DashboardPage';
 import ConsultationPage from './pages/ConsultationPage';
 
+// Admin Pages
+import AdminProductsPage from './pages/AdminProductsPage';
+import AdminProductEditPage from './pages/AdminProductEditPage';
+import AdminOrdersPage from './pages/AdminOrdersPage';
+import AdminOrderDetailPage from './pages/AdminOrderDetailPage';
+import AdminConsultationsPage from './pages/AdminConsultationsPage';
+
 function App() {
   return (
     <Router>
@@ -40,6 +47,14 @@ function App() {
                 <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/consultation" element={<ConsultationPage />} />
+
+                {/* Admin Routes */}
+                <Route path="/admin/products" element={<AdminProductsPage />} />
+                <Route path="/admin/products/create" element={<AdminProductEditPage />} />
+                <Route path="/admin/products/:id/edit" element={<AdminProductEditPage />} />
+                <Route path="/admin/orders" element={<AdminOrdersPage />} />
+                <Route path="/admin/orders/:id" element={<AdminOrderDetailPage />} />
+                <Route path="/admin/consultations" element={<AdminConsultationsPage />} />
               </Routes>
             </main>
           </div>

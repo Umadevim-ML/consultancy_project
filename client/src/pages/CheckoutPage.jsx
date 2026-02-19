@@ -90,10 +90,10 @@ const CheckoutPage = () => {
                     </div>
 
                     <div className="border-t pt-4">
-                        <div className="flex justify-between mb-2"><span>Items</span><span>${itemsPrice.toFixed(2)}</span></div>
-                        <div className="flex justify-between mb-2"><span>Shipping</span><span>${shippingPrice.toFixed(2)}</span></div>
-                        <div className="flex justify-between mb-2"><span>Tax</span><span>${taxPrice.toFixed(2)}</span></div>
-                        <div className="flex justify-between font-bold text-xl mt-4"><span>Total</span><span>${totalPrice.toFixed(2)}</span></div>
+                        <div className="flex justify-between mb-2"><span>Items</span><span>₹{itemsPrice.toFixed(2)}</span></div>
+                        <div className="flex justify-between mb-2"><span>Shipping</span><span>₹{shippingPrice.toFixed(2)}</span></div>
+                        <div className="flex justify-between mb-2"><span>Tax</span><span>₹{taxPrice.toFixed(2)}</span></div>
+                        <div className="flex justify-between font-bold text-xl mt-4"><span>Total</span><span>₹{totalPrice.toFixed(2)}</span></div>
                     </div>
 
                     <button

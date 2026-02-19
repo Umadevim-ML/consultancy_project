@@ -30,7 +30,7 @@ const ProductCard = ({ product }) => {
                     <p>{product.description.substring(0, 60)}...</p>
                 </div>
                 <div className="mt-auto flex justify-between items-center">
-                    <span className="text-xl font-bold">${product.price}</span>
+                    <div className="text-xl font-bold text-blue-900">₹{product.price}</div>
                     <button
                         onClick={() => addToCart(product, 1)}
                         className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition"

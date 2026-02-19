@@ -6,6 +6,7 @@ const Order = require('../models/Order');
 // @access  Private
 const addOrderItems = async (req, res) => {
     try {
+        console.log('Incoming Order Data:', req.body);
         const {
             orderItems,
             shippingAddress,
@@ -33,10 +34,11 @@ const addOrderItems = async (req, res) => {
         });
 
         const createdOrder = await order.save();
+        console.log('Order created successfully:', createdOrder._id);
         res.status(201).json(createdOrder);
     } catch (error) {
-        console.error('Create order error:', error);
-        res.status(500).json({ message: 'Error creating order' });
+        console.error('Create order error details:', error);
+        res.status(500).json({ message: 'Error creating order', error: error.message });
     }
 };
 
