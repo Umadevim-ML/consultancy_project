@@ -10,6 +10,7 @@ import CartPage from './pages/CartPage';
 
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
+import { Toaster } from 'react-hot-toast';
 
 import RecommendationsPage from './pages/RecommendationsPage';
 
@@ -32,6 +33,7 @@ function App() {
     <Router>
       <AuthProvider>
         <CartProvider>
+          <Toaster position="top-right" reverseOrder={false} />
           <div className="bg-gray-50 min-h-screen text-gray-800">
             <Header />
             <main className="py-3">

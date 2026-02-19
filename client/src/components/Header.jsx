@@ -18,7 +18,7 @@ const Header = () => {
     return (
         <header className="bg-blue-900 text-white p-4 shadow-md">
             <div className="container mx-auto flex justify-between items-center">
-                <Link to="/" className="text-2xl font-bold">SleepWell</Link>
+                <Link to="/" className="text-2xl font-bold">ComfyCloud</Link>
                 <nav className="flex items-center space-x-6">
                     {user && user.isAdmin ? (
                         /* Admin Navigation */
