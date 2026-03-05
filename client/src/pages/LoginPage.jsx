@@ -28,7 +28,6 @@ const LoginPage = () => {
         <div className="flex justify-center items-center h-screen bg-gray-100">
             <div className="w-full max-w-md bg-white p-8 rounded shadow-md">
                 <h2 className="text-2xl font-bold mb-6 text-center">Sign In</h2>
-                {error && <div className="bg-red-100 text-red-700 p-3 mb-4 rounded">{error}</div>}
                 {loading && <div className="text-center mb-4">Loading...</div>}
                 <form onSubmit={submitHandler}>
                     <div className="mb-4">

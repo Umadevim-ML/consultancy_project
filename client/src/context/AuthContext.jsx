@@ -1,6 +1,7 @@
 
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 export const AuthContext = createContext();
 
@@ -34,12 +35,13 @@ export const AuthProvider = ({ children }) => {
 
             setUser(data);
             localStorage.setItem('userInfo', JSON.stringify(data));
+            toast.success(`Welcome back, ${data.name}!`);
         } catch (err) {
-            setError(
-                err.response && err.response.data.message
-                    ? err.response.data.message
-                    : err.message
-            );
+            const message = err.response && err.response.data.message
+                ? err.response.data.message
+                : err.message;
+            setError(message);
+            toast.error(message);
         }
     };
 
@@ -60,18 +62,20 @@ export const AuthProvider = ({ children }) => {
 
             setUser(data);
             localStorage.setItem('userInfo', JSON.stringify(data));
+            toast.success(`Account created! Welcome, ${data.name}.`);
         } catch (err) {
-            setError(
-                err.response && err.response.data.message
-                    ? err.response.data.message
-                    : err.message
-            );
+            const message = err.response && err.response.data.message
+                ? err.response.data.message
+                : err.message;
+            setError(message);
+            toast.error(message);
         }
     };
 
     const logout = () => {
         localStorage.removeItem('userInfo');
         setUser(null);
+        toast.success('Logged out successfully');
     };
 
     return (

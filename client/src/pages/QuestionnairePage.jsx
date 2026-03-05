@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import { toast } from 'react-hot-toast';
 
 const QuestionnairePage = () => {
     const { user } = useContext(AuthContext);
@@ -68,7 +69,7 @@ const QuestionnairePage = () => {
             navigate('/recommendations'); // We need to create this route
         } catch (error) {
             console.error(error);
-            alert('Error submitting questionnaire');
+            toast.error('Error submitting questionnaire');
         }
     };
 

@@ -1,11 +1,12 @@
 
 const Consultation = require('../models/Consultation');
+const Slot = require('../models/Slot');
 
 // @desc    Book a consultation
 // @route   POST /api/consultations
 // @access  Private
 const bookConsultation = async (req, res) => {
-    const { date, time, issueDescription } = req.body;
+    const { date, time, issueDescription, slotId } = req.body;
 
     try {
         const consultation = await Consultation.create({
@@ -14,6 +15,12 @@ const bookConsultation = async (req, res) => {
             time,
             issueDescription,
         });
+
+        // Mark slot as booked if slotId is provided
+        if (slotId) {
+            await Slot.findByIdAndUpdate(slotId, { isBooked: true });
+        }
+
         res.status(201).json(consultation);
     } catch (error) {
         res.status(400).json({ message: 'Invalid consultation data', error: error.message });
@@ -77,10 +84,61 @@ const deleteConsultation = async (req, res) => {
     const consultation = await Consultation.findById(req.params.id);
 
     if (consultation) {
+        // Find the corresponding slot and mark it as NOT booked
+        const start = new Date(consultation.date);
+        start.setHours(0, 0, 0, 0);
+        const end = new Date(consultation.date);
+        end.setHours(23, 59, 59, 999);
+
+        await Slot.findOneAndUpdate(
+            { date: { $gte: start, $lte: end }, time: consultation.time },
+            { isBooked: false }
+        );
+
         await Consultation.findByIdAndDelete(req.params.id);
         res.json({ message: 'Consultation removed' });
     } else {
         res.status(404).json({ message: 'Consultation not found' });
+    }
+};
+
+// @desc    Cancel a consultation
+// @route   PUT /api/consultations/:id/cancel
+// @access  Private
+const cancelConsultation = async (req, res) => {
+    try {
+        const consultation = await Consultation.findById(req.params.id);
+
+        if (!consultation) {
+            return res.status(404).json({ message: 'Consultation not found' });
+        }
+
+        // Check if the consultation belongs to the user
+        if (consultation.user.toString() !== req.user._id.toString()) {
+            return res.status(401).json({ message: 'Not authorized' });
+        }
+
+        if (consultation.status === 'Completed' || consultation.status === 'Cancelled' || consultation.status === 'Rejected') {
+            return res.status(400).json({ message: `Cannot cancel a ${consultation.status} appointment` });
+        }
+
+        consultation.status = 'Cancelled';
+        const updatedConsultation = await consultation.save();
+
+        // Find the corresponding slot and mark it as NOT booked
+        const start = new Date(consultation.date);
+        start.setHours(0, 0, 0, 0);
+        const end = new Date(consultation.date);
+        end.setHours(23, 59, 59, 999);
+
+        await Slot.findOneAndUpdate(
+            { date: { $gte: start, $lte: end }, time: consultation.time },
+            { isBooked: false }
+        );
+
+        res.json(updatedConsultation);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
 
@@ -91,4 +149,5 @@ module.exports = {
     getConsultations,
     updateConsultationStatus,
     deleteConsultation,
+    cancelConsultation,
 };

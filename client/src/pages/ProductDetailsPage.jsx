@@ -4,7 +4,9 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
-import { FaStar } from 'react-icons/fa';
+import { FaStar, FaHeart } from 'react-icons/fa';
+import { WishlistContext } from '../context/WishlistContext';
+import { toast } from 'react-hot-toast';
 
 const ProductDetailsPage = () => {
     const { id } = useParams();
@@ -15,6 +17,9 @@ const ProductDetailsPage = () => {
 
     const { addToCart } = useContext(CartContext);
     const { user } = useContext(AuthContext);
+    const { toggleWishlist, isInWishlist } = useContext(WishlistContext);
+
+    const isLiked = isInWishlist(id);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -38,13 +43,13 @@ const ProductDetailsPage = () => {
                 { rating, comment },
                 config
             );
-            alert('Review Submitted!');
+            toast.success('Review Submitted!');
             // Reload product to show new review
             const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
             setProduct(data);
             setComment('');
         } catch (error) {
-            alert(error.response.data.message);
+            toast.error(error.response?.data?.message || 'Error submitting review');
         }
     };
 
@@ -68,14 +73,37 @@ const ProductDetailsPage = () => {
                     <img src={product.image} alt={product.name} className="w-full rounded shadow-lg" />
                 </div>
                 <div>
-                    <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
+                    <div className="flex justify-between items-start mb-2">
+                        <h1 className="text-3xl font-bold">{product.name}</h1>
+                        <button
+                            onClick={() => toggleWishlist(product._id)}
+                            className={`p-3 rounded-full shadow-sm transition transform active:scale-90 ${isLiked ? 'bg-red-50 text-red-500' : 'bg-gray-100 text-gray-400 hover:text-red-400'}`}
+                            title={isLiked ? "Remove from wishlist" : "Add to wishlist"}
+                        >
+                            <FaHeart size={20} />
+                        </button>
+                    </div>
                     <div className="flex items-center mb-4">
                         <span className="text-yellow-500 mr-2 flex items-center text-xl">
                             {product.rating} <FaStar className="ml-1" />
                         </span>
                         <span>({product.numReviews} reviews)</span>
                     </div>
-                    <p className="text-2xl font-bold mb-4">₹{product.price}</p>
+                    <div className="mb-4">
+                        {product.discount > 0 ? (
+                            <div className="flex items-center gap-3">
+                                <span className="text-gray-500 line-through text-lg">₹{product.price}</span>
+                                <span className="text-3xl font-bold text-red-600">
+                                    ₹{(product.price * (1 - product.discount / 100)).toFixed(2)}
+                                </span>
+                                <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-sm font-bold">
+                                    {product.discount}% OFF
+                                </span>
+                            </div>
+                        ) : (
+                            <p className="text-3xl font-bold">₹{product.price}</p>
+                        )}
+                    </div>
                     <p className="mb-6">{product.description}</p>
 
                     <div className="mb-4">

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 const CheckoutPage = () => {
     const { cartItems, clearCart } = useContext(CartContext);
@@ -44,11 +45,11 @@ const CheckoutPage = () => {
             const { data } = await axios.post('http://localhost:5000/api/orders', order, config);
 
             clearCart();
-            alert('Order Placed Successfully!');
+            toast.success('Order Placed Successfully!');
             navigate('/'); // Navigate to Dashboard or Home
         } catch (error) {
             console.error(error);
-            alert('Error placing order');
+            toast.error('Error placing order');
         }
     };
 

@@ -2,13 +2,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { toast } from 'react-hot-toast';
 
 const RegisterPage = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [message, setMessage] = useState(null);
 
     const { register, user, error, loading } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ const RegisterPage = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
-            setMessage('Passwords do not match');
+            toast.error('Passwords do not match');
         } else {
             register(name, email, password);
         }
@@ -35,8 +35,6 @@ const RegisterPage = () => {
         <div className="flex justify-center items-center h-screen bg-gray-100">
             <div className="w-full max-w-md bg-white p-8 rounded shadow-md">
                 <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
-                {message && <div className="bg-red-100 text-red-700 p-3 mb-4 rounded">{message}</div>}
-                {error && <div className="bg-red-100 text-red-700 p-3 mb-4 rounded">{error}</div>}
                 {loading && <div className="text-center mb-4">Loading...</div>}
                 <form onSubmit={submitHandler}>
                     <div className="mb-4">

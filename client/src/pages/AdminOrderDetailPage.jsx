@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { FaArrowLeft, FaCheck, FaTimes } from 'react-icons/fa';
+import { toast } from 'react-hot-toast';
 
 const AdminOrderDetailPage = () => {
     const { id } = useParams();
@@ -11,7 +12,6 @@ const AdminOrderDetailPage = () => {
     const { user } = useContext(AuthContext);
     const [order, setOrder] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [message, setMessage] = useState('');
 
     const config = {
         headers: {
@@ -38,13 +38,35 @@ const AdminOrderDetailPage = () => {
         fetchOrder();
     }, [id, user, navigate]);
 
+    const shipHandler = async () => {
+        if (!window.confirm('Mark as shipped?')) return;
+        try {
+            await axios.put(`http://localhost:5000/api/orders/${id}/ship`, {}, config);
+            toast.success('Order marked as shipped');
+            fetchOrder();
+        } catch (error) {
+            toast.error('Error updating shipping status');
+        }
+    };
+
+    const cancelHandler = async () => {
+        if (!window.confirm('Cancel this order?')) return;
+        try {
+            await axios.put(`http://localhost:5000/api/orders/${id}/cancel`, {}, config);
+            toast.success('Order cancelled');
+            fetchOrder();
+        } catch (error) {
+            toast.error('Error cancelling order');
+        }
+    };
+
     const deliverHandler = async () => {
         try {
             await axios.put(`http://localhost:5000/api/orders/${id}/deliver`, {}, config);
-            setMessage('Order marked as delivered');
+            toast.success('Order marked as delivered');
             fetchOrder();
         } catch (error) {
-            setMessage('Error updating delivery status');
+            toast.error('Error updating delivery status');
         }
     };
 
@@ -62,9 +84,7 @@ const AdminOrderDetailPage = () => {
 
             <h1 className="text-3xl font-bold mb-6">Order Details</h1>
 
-            {message && (
-                <div className="bg-blue-100 text-blue-700 p-3 rounded mb-4">{message}</div>
-            )}
+
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 {/* Order Info */}
@@ -82,6 +102,14 @@ const AdminOrderDetailPage = () => {
                             )}
                         </p>
                         <p>
+                            <strong>Shipping:</strong>{' '}
+                            {order.isShipped ? (
+                                <span className="text-green-600 font-medium">Shipped on {new Date(order.shippedAt).toLocaleDateString()}</span>
+                            ) : (
+                                <span className="text-yellow-600 font-medium">Not Shipped</span>
+                            )}
+                        </p>
+                        <p>
                             <strong>Delivery:</strong>{' '}
                             {order.isDelivered ? (
                                 <span className="text-green-600 font-medium">Delivered on {new Date(order.deliveredAt).toLocaleDateString()}</span>
@@ -89,6 +117,11 @@ const AdminOrderDetailPage = () => {
                                 <span className="text-yellow-600 font-medium">Pending</span>
                             )}
                         </p>
+                        {order.isCancelled && (
+                            <p>
+                                <strong className="text-red-600">CANCELLED on {new Date(order.cancelledAt).toLocaleDateString()}</strong>
+                            </p>
+                        )}
                     </div>
                 </div>
 
@@ -180,13 +213,29 @@ const AdminOrderDetailPage = () => {
             </div>
 
             {/* Admin Actions */}
-            {!order.isDelivered && (
-                <div className="text-center">
+            {!order.isCancelled && !order.isDelivered && (
+                <div className="flex flex-wrap justify-center gap-4">
+                    {!order.isShipped && (
+                        <button
+                            onClick={shipHandler}
+                            className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 text-lg font-medium"
+                        >
+                            Mark as Shipped
+                        </button>
+                    )}
+                    {order.isShipped && !order.isDelivered && (
+                        <button
+                            onClick={deliverHandler}
+                            className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 text-lg font-medium"
+                        >
+                            <FaCheck className="inline mr-2" /> Mark as Delivered
+                        </button>
+                    )}
                     <button
-                        onClick={deliverHandler}
-                        className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 text-lg font-medium"
+                        onClick={cancelHandler}
+                        className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 text-lg font-medium"
                     >
-                        <FaCheck className="inline mr-2" /> Mark as Delivered
+                        <FaTimes className="inline mr-2" /> Cancel Order
                     </button>
                 </div>
             )}

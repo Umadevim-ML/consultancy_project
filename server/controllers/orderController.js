@@ -1,6 +1,8 @@
 
 const Order = require('../models/Order');
 
+const Product = require('../models/Product');
+
 // @desc    Create new order
 // @route   POST /api/orders
 // @access  Private
@@ -22,6 +24,20 @@ const addOrderItems = async (req, res) => {
             return;
         }
 
+        // 1. Validate stock for all items first
+        for (const item of orderItems) {
+            const product = await Product.findById(item.product);
+            if (!product) {
+                res.status(404).json({ message: `Product not found: ${item.name}` });
+                return;
+            }
+            if (product.countInStock < item.qty) {
+                res.status(400).json({ message: `Insufficient stock for product: ${product.name}` });
+                return;
+            }
+        }
+
+        // 2. Create the order
         const order = new Order({
             orderItems,
             user: req.user._id,
@@ -34,6 +50,14 @@ const addOrderItems = async (req, res) => {
         });
 
         const createdOrder = await order.save();
+
+        // 3. Decrement stock
+        for (const item of orderItems) {
+            await Product.findByIdAndUpdate(item.product, {
+                $inc: { countInStock: -item.qty }
+            });
+        }
+
         console.log('Order created successfully:', createdOrder._id);
         res.status(201).json(createdOrder);
     } catch (error) {
@@ -117,11 +141,68 @@ const updateOrderToDelivered = async (req, res) => {
 // @access  Private
 const getMyOrders = async (req, res) => {
     try {
-        const orders = await Order.find({ user: req.user._id });
+        const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 });
         res.json(orders);
     } catch (error) {
         console.error('Get my orders error:', error);
         res.status(500).json({ message: 'Error fetching orders' });
+    }
+};
+
+// @desc    Update order to shipped
+// @route   PUT /api/orders/:id/ship
+// @access  Private/Admin
+const updateOrderToShipped = async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id);
+
+        if (order) {
+            order.isShipped = true;
+            order.shippedAt = Date.now();
+
+            const updatedOrder = await order.save();
+            res.json(updatedOrder);
+        } else {
+            res.status(404).json({ message: 'Order not found' });
+        }
+    } catch (error) {
+        console.error('Update order to shipped error:', error);
+        res.status(500).json({ message: 'Error updating shipping status' });
+    }
+};
+
+// @desc    Cancel order
+// @route   PUT /api/orders/:id/cancel
+// @access  Private/Admin
+const cancelOrder = async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id);
+
+        if (order) {
+            if (order.isCancelled) {
+                res.status(400).json({ message: 'Order is already cancelled' });
+                return;
+            }
+
+            order.isCancelled = true;
+            order.cancelledAt = Date.now();
+
+            const updatedOrder = await order.save();
+
+            // Restore stock
+            for (const item of order.orderItems) {
+                await Product.findByIdAndUpdate(item.product, {
+                    $inc: { countInStock: item.qty }
+                });
+            }
+
+            res.json(updatedOrder);
+        } else {
+            res.status(404).json({ message: 'Order not found' });
+        }
+    } catch (error) {
+        console.error('Cancel order error:', error);
+        res.status(500).json({ message: 'Error cancelling order' });
     }
 };
 
@@ -146,6 +227,8 @@ module.exports = {
     getOrderById,
     updateOrderToPaid,
     updateOrderToDelivered,
+    updateOrderToShipped,
+    cancelOrder,
     getMyOrders,
     getOrders,
 };

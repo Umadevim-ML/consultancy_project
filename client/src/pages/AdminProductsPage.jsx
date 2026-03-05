@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { FaEdit, FaTrash, FaPlus, FaBoxOpen, FaBox } from 'react-icons/fa';
+import { toast } from 'react-hot-toast';
 
 const AdminProductsPage = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [message, setMessage] = useState('');
 
     const config = {
         headers: {
@@ -42,10 +42,10 @@ const AdminProductsPage = () => {
         if (window.confirm('Are you sure you want to delete this product?')) {
             try {
                 await axios.delete(`http://localhost:5000/api/products/${id}`, config);
-                setMessage('Product deleted');
+                toast.success('Product deleted');
                 fetchProducts();
             } catch (error) {
-                setMessage('Error deleting product');
+                toast.error('Error deleting product');
             }
         }
     };
@@ -58,10 +58,10 @@ const AdminProductsPage = () => {
                 { countInStock: newStock },
                 config
             );
-            setMessage(newStock === 0 ? 'Marked out of stock' : 'Stock refilled to 10');
+            toast.success(newStock === 0 ? 'Marked out of stock' : 'Stock refilled to 10');
             fetchProducts();
         } catch (error) {
-            setMessage('Error updating stock');
+            toast.error('Error updating stock');
         }
     };
 
@@ -74,7 +74,7 @@ const AdminProductsPage = () => {
             );
             fetchProducts();
         } catch (error) {
-            setMessage('Error updating stock');
+            toast.error('Error updating stock');
         }
     };
 
@@ -85,10 +85,10 @@ const AdminProductsPage = () => {
                 { discount: Number(discount) },
                 config
             );
-            setMessage('Discount updated');
+            toast.success('Discount updated');
             fetchProducts();
         } catch (error) {
-            setMessage('Error updating discount');
+            toast.error('Error updating discount');
         }
     };
 
@@ -106,12 +106,7 @@ const AdminProductsPage = () => {
                 </button>
             </div>
 
-            {message && (
-                <div className="bg-blue-100 text-blue-700 p-3 rounded mb-4">
-                    {message}
-                    <button onClick={() => setMessage('')} className="float-right font-bold">&times;</button>
-                </div>
-            )}
+
 
             <div className="bg-white rounded-lg shadow overflow-x-auto">
                 <table className="w-full text-sm">

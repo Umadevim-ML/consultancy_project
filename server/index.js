@@ -23,12 +23,18 @@ const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const consultationRoutes = require('./routes/consultationRoutes');
 const recommendationRoutes = require('./routes/recommendationRoutes');
+const slotRoutes = require('./routes/slotRoutes');
+const wishlistRoutes = require('./routes/wishlistRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/consultations', consultationRoutes);
 app.use('/api/recommendations', recommendationRoutes);
+app.use('/api/slots', slotRoutes);
+app.use('/api/wishlist', wishlistRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.use('/uploads', express.static('uploads'));
 
