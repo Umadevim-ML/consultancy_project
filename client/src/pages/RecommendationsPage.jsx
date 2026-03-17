@@ -66,13 +66,9 @@ const RecommendationsPage = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {recommendations.map((item) => (
                         <div key={item.product._id} className="relative">
-                            <div className="absolute top-0 right-0 bg-green-500 text-white px-2 py-1 rounded-bl-lg z-10 text-sm">
-                                Match Score: {item.score}
-                            </div>
+                            
                             <ProductCard product={item.product} />
-                            <div className="mt-2 text-sm text-gray-600 bg-yellow-50 p-2 rounded">
-                                <strong>Why:</strong> {item.reason}
-                            </div>
+                            
                         </div>
                     ))}
                 </div>

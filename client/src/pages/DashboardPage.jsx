@@ -3,6 +3,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import {
+    BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid
+} from 'recharts';
 import { FaUser, FaShoppingBag, FaBox, FaCalendarDay, FaClock, FaCheckCircle, FaTimesCircle, FaHourglassHalf, FaUsers, FaChartLine, FaWallet, FaTruck } from 'react-icons/fa';
 
 const STATUS_BADGE = {
@@ -141,44 +144,24 @@ const DashboardPage = () => {
                         </div>
                     )}
 
-                    {/* Monthly Performance Chart (Simple CSS) */}
-                    {stats && stats.monthlySales?.length > 0 && (
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-10 text-left">
-                            <h3 className="text-lg font-bold text-gray-800 mb-6 flex items-center gap-2">
-                                <FaChartLine className="text-blue-500" /> Monthly Revenue Performance ({new Date().getFullYear()})
-                            </h3>
-                            <div className="flex items-end gap-2 md:gap-4 h-48 overflow-x-auto pb-4">
-                                {stats.monthlySales.map((m, i) => {
-                                    const maxVal = Math.max(...stats.monthlySales.map(x => x.total));
-                                    const height = (m.total / maxVal) * 100;
-                                    return (
-                                        <div key={i} className="flex-1 flex flex-col items-center group min-w-[40px]">
-                                            <div className="relative w-full flex flex-col items-center h-full justify-end">
-                                                <div
-                                                    className="w-full bg-blue-500 rounded-t-lg transition-all duration-500 group-hover:bg-blue-600 relative"
-                                                    style={{ height: `${height}%` }}
-                                                >
-                                                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap z-10 font-bold">
-                                                        ₹{m.total.toLocaleString()}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <span className="text-[10px] font-bold text-gray-500 mt-3 rotate-[-45deg] md:rotate-0">{m.month}</span>
-                                        </div>
-                                    )
-                                })}
-                                {/* Fill remaining months if any */}
-                                {stats.monthlySales.length < 12 && Array(12 - stats.monthlySales.length).fill(0).map((_, i) => (
-                                    <div key={`empty-${i}`} className="flex-1 flex flex-col items-center min-w-[40px]">
-                                        <div className="h-full flex items-end w-full">
-                                            <div className="w-full bg-gray-50 h-2 rounded-t-lg"></div>
-                                        </div>
-                                        <span className="text-[10px] font-bold text-gray-300 mt-3">...</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
+                    {/* Monthly Revenue Chart */}
+{stats && stats.monthlySales?.length > 0 && (
+    <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-10 text-left">
+        <h3 className="text-lg font-bold text-gray-800 mb-6 flex items-center gap-2">
+            <FaChartLine className="text-blue-500" /> Monthly Revenue Performance ({new Date().getFullYear()})
+        </h3>
+
+        <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={stats.monthlySales}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="month" />
+                <YAxis />
+                <Tooltip formatter={(value) => `₹${value.toLocaleString()}`} />
+                <Bar dataKey="total" radius={[8, 8, 0, 0]} />
+            </BarChart>
+        </ResponsiveContainer>
+    </div>
+)}  
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Admin Orders Preview */}
