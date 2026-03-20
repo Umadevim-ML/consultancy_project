@@ -1,7 +1,7 @@
 
 const Order = require('../models/Order');
-
 const Product = require('../models/Product');
+const { createNotification, notifyAdmins } = require('../utils/notification');
 
 // @desc    Create new order
 // @route   POST /api/orders
@@ -59,6 +59,24 @@ const addOrderItems = async (req, res) => {
         }
 
         console.log('Order created successfully:', createdOrder._id);
+
+        // Notify User
+        await createNotification(
+            req.user._id,
+            'Order Placed',
+            `Your order #${createdOrder._id} has been placed successfully.`,
+            'Order',
+            `/order/${createdOrder._id}`
+        );
+
+        // Notify Admins
+        await notifyAdmins(
+            'New Order Received',
+            `A new order #${createdOrder._id} has been placed by ${req.user.name}.`,
+            'Order',
+            `/admin/order/${createdOrder._id}`
+        );
+
         res.status(201).json(createdOrder);
     } catch (error) {
         console.error('Create order error details:', error);
@@ -126,6 +144,16 @@ const updateOrderToDelivered = async (req, res) => {
             order.deliveredAt = Date.now();
 
             const updatedOrder = await order.save();
+
+            // Notify User
+            await createNotification(
+                order.user,
+                'Order Delivered',
+                `Your order #${order._id} has been delivered.`,
+                'Order',
+                `/order/${order._id}`
+            );
+
             res.json(updatedOrder);
         } else {
             res.status(404).json({ message: 'Order not found' });
@@ -161,6 +189,16 @@ const updateOrderToShipped = async (req, res) => {
             order.shippedAt = Date.now();
 
             const updatedOrder = await order.save();
+
+            // Notify User
+            await createNotification(
+                order.user,
+                'Order Shipped',
+                `Your order #${order._id} has been shipped.`,
+                'Order',
+                `/order/${order._id}`
+            );
+
             res.json(updatedOrder);
         } else {
             res.status(404).json({ message: 'Order not found' });
@@ -195,6 +233,15 @@ const cancelOrder = async (req, res) => {
                     $inc: { countInStock: item.qty }
                 });
             }
+
+            // Notify User
+            await createNotification(
+                order.user,
+                'Order Cancelled',
+                `Your order #${order._id} has been cancelled.`,
+                'Order',
+                `/order/${order._id}`
+            );
 
             res.json(updatedOrder);
         } else {

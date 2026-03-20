@@ -1,6 +1,6 @@
-
 const Consultation = require('../models/Consultation');
 const Slot = require('../models/Slot');
+const { createNotification, notifyAdmins } = require('../utils/notification');
 
 // @desc    Book a consultation
 // @route   POST /api/consultations
@@ -21,6 +21,23 @@ const bookConsultation = async (req, res) => {
             await Slot.findByIdAndUpdate(slotId, { isBooked: true });
         }
 
+        // Notify User
+        await createNotification(
+            req.user._id,
+            'Consultation Booked',
+            `Your consultation for ${new Date(date).toLocaleDateString()} at ${time} has been booked.`,
+            'Consultation',
+            '/my-consultations'
+        );
+
+        // Notify Admins
+        await notifyAdmins(
+            'New Consultation Booked',
+            `${req.user.name} has booked a consultation for ${new Date(date).toLocaleDateString()} at ${time}.`,
+            'Consultation',
+            '/admin/consultations'
+        );
+
         res.status(201).json(consultation);
     } catch (error) {
         res.status(400).json({ message: 'Invalid consultation data', error: error.message });
@@ -40,6 +57,24 @@ const adminBookConsultation = async (req, res) => {
             time,
             issueDescription,
         });
+
+        // Notify User
+        await createNotification(
+            userId,
+            'Appointment Booked',
+            `An appointment has been booked for you on ${new Date(date).toLocaleDateString()} at ${time} by an administrator.`,
+            'Consultation',
+            '/my-consultations'
+        );
+
+        // Notify Admins
+        await notifyAdmins(
+            'Appointment Booked (Admin)',
+            `An appointment has been booked for user ID: ${userId} on ${new Date(date).toLocaleDateString()} at ${time}.`,
+            'Consultation',
+            '/admin/consultations'
+        );
+
         res.status(201).json(consultation);
     } catch (error) {
         res.status(400).json({ message: 'Invalid consultation data', error: error.message });
@@ -71,6 +106,16 @@ const updateConsultationStatus = async (req, res) => {
     if (consultation) {
         consultation.status = req.body.status || consultation.status;
         const updatedConsultation = await consultation.save();
+
+        // Notify User
+        await createNotification(
+            consultation.user,
+            'Consultation Update',
+            `Your consultation status has been updated to ${consultation.status}.`,
+            'Consultation',
+            '/my-consultations'
+        );
+
         res.json(updatedConsultation);
     } else {
         res.status(404).json({ message: 'Consultation not found' });
@@ -130,10 +175,26 @@ const cancelConsultation = async (req, res) => {
         start.setHours(0, 0, 0, 0);
         const end = new Date(consultation.date);
         end.setHours(23, 59, 59, 999);
-
         await Slot.findOneAndUpdate(
             { date: { $gte: start, $lte: end }, time: consultation.time },
             { isBooked: false }
+        );
+
+        // Notify User
+        await createNotification(
+            req.user._id,
+            'Consultation Cancelled',
+            `Your consultation for ${new Date(consultation.date).toLocaleDateString()} has been cancelled.`,
+            'Consultation',
+            '/my-consultations'
+        );
+
+        // Notify Admins
+        await notifyAdmins(
+            'Consultation Cancelled by User',
+            `${req.user.name} has cancelled their consultation for ${new Date(consultation.date).toLocaleDateString()}.`,
+            'Consultation',
+            '/admin/consultations'
         );
 
         res.json(updatedConsultation);

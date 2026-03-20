@@ -11,6 +11,7 @@ import CartPage from './pages/CartPage';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
+import { NotificationProvider } from './context/NotificationContext';
 import { Toaster } from 'react-hot-toast';
 
 import RecommendationsPage from './pages/RecommendationsPage';
@@ -36,8 +37,9 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <WishlistProvider>
-          <CartProvider>
+        <NotificationProvider>
+          <WishlistProvider>
+            <CartProvider>
             <Toaster
               position="top-center"
               reverseOrder={false}
@@ -77,8 +79,9 @@ function App() {
                 </Routes>
               </main>
             </div>
-          </CartProvider>
-        </WishlistProvider>
+            </CartProvider>
+          </WishlistProvider>
+        </NotificationProvider>
       </AuthProvider>
     </Router >
   );

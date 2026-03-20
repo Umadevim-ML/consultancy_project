@@ -26,6 +26,7 @@ const recommendationRoutes = require('./routes/recommendationRoutes');
 const slotRoutes = require('./routes/slotRoutes');
 const wishlistRoutes = require('./routes/wishlistRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
@@ -35,6 +36,7 @@ app.use('/api/recommendations', recommendationRoutes);
 app.use('/api/slots', slotRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 app.use('/uploads', express.static('uploads'));
 

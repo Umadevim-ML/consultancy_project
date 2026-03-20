@@ -5,6 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
 import { FaShoppingCart, FaUser, FaCog, FaSignOutAlt, FaHeart } from 'react-icons/fa';
 import { WishlistContext } from '../context/WishlistContext';
+import NotificationBell from './NotificationBell';
 
 const Header = () => {
     const { user, logout } = useContext(AuthContext);
@@ -47,6 +48,9 @@ const Header = () => {
                             <Link to="/dashboard" className="hover:text-yellow-400 flex items-center gap-1">
                                 <FaUser className="text-xs" /> Dashboard
                             </Link>
+
+                            <NotificationBell />
+
                             <button onClick={logoutHandler} className="hover:text-red-400 flex items-center gap-1 ml-4 border-l pl-4 border-blue-700">
                                 <FaSignOutAlt /> Logout
                             </button>
@@ -77,9 +81,10 @@ const Header = () => {
                                 )}
                             </Link>
 
-
                             {user ? (
-                                <div className="relative" ref={dropdownRef}>
+                                <div className="flex items-center space-x-6">
+                                    <NotificationBell />
+                                    <div className="relative" ref={dropdownRef}>
                                     <button
                                         onClick={() => setDropdownOpen(!dropdownOpen)}
                                         className="flex items-center hover:text-yellow-400 focus:outline-none"
@@ -107,6 +112,7 @@ const Header = () => {
                                             </button>
                                         </div>
                                     )}
+                                    </div>
                                 </div>
                             ) : (
                                 <Link to="/login" className="hover:text-yellow-400">Login</Link>
