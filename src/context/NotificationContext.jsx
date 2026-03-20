@@ -17,7 +17,7 @@ export const NotificationProvider = ({ children }) => {
                     Authorization: `Bearer ${user.token}`,
                 },
             };
-            const { data } = await axios.get('http://localhost:5000/api/notifications', config);
+            const { data } = await axios.get('/api/notifications', config);
             setNotifications(data);
             setUnreadCount(data.filter((n) => !n.isRead).length);
         } catch (error) {
@@ -44,7 +44,7 @@ export const NotificationProvider = ({ children }) => {
                     Authorization: `Bearer ${user.token}`,
                 },
             };
-            await axios.put(`http://localhost:5000/api/notifications/${id}/read`, {}, config);
+            await axios.put(`/api/notifications/${id}/read`, {}, config);
             setNotifications((prev) =>
                 prev.map((n) => (n._id === id ? { ...n, isRead: true } : n))
             );
@@ -61,7 +61,7 @@ export const NotificationProvider = ({ children }) => {
                     Authorization: `Bearer ${user.token}`,
                 },
             };
-            await axios.put('http://localhost:5000/api/notifications/read-all', {}, config);
+            await axios.put('/api/notifications/read-all', {}, config);
             setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
             setUnreadCount(0);
         } catch (error) {

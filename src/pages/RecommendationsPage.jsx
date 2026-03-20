@@ -19,7 +19,7 @@ const RecommendationsPage = () => {
                         Authorization: `Bearer ${user.token}`,
                     },
                 };
-                const { data } = await axios.get('http://localhost:5000/api/recommendations', config);
+                const { data } = await axios.get('/api/recommendations', config);
                 // The API returns a list of recommendation objects.
                 // Each object has a `recommendedProducts` array with `{ product: {...}, score, reason }`.
                 // We want the latest recommendation set.

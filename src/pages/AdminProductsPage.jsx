@@ -21,7 +21,7 @@ const AdminProductsPage = () => {
 
     const fetchProducts = async () => {
         try {
-            const { data } = await axios.get('http://localhost:5000/api/products');
+            const { data } = await axios.get('/api/products');
             setProducts(data);
         } catch (error) {
             console.error(error);
@@ -41,7 +41,7 @@ const AdminProductsPage = () => {
     const deleteHandler = async (id) => {
         if (window.confirm('Are you sure you want to delete this product?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/products/${id}`, config);
+                await axios.delete(`/api/products/${id}`, config);
                 toast.success('Product deleted');
                 fetchProducts();
             } catch (error) {
@@ -54,7 +54,7 @@ const AdminProductsPage = () => {
         try {
             const newStock = product.countInStock > 0 ? 0 : 10;
             await axios.patch(
-                `http://localhost:5000/api/products/${product._id}/stock`,
+                `/api/products/${product._id}/stock`,
                 { countInStock: newStock },
                 config
             );
@@ -68,7 +68,7 @@ const AdminProductsPage = () => {
     const updateStockHandler = async (id, newStock) => {
         try {
             await axios.patch(
-                `http://localhost:5000/api/products/${id}/stock`,
+                `/api/products/${id}/stock`,
                 { countInStock: Number(newStock) },
                 config
             );
@@ -81,7 +81,7 @@ const AdminProductsPage = () => {
     const updateDiscountHandler = async (id, discount) => {
         try {
             await axios.patch(
-                `http://localhost:5000/api/products/${id}/discount`,
+                `/api/products/${id}/discount`,
                 { discount: Number(discount) },
                 config
             );

@@ -42,7 +42,7 @@ const CheckoutPage = () => {
                 totalPrice,
             };
 
-            const { data } = await axios.post('http://localhost:5000/api/orders', order, config);
+            const { data } = await axios.post('/api/orders', order, config);
 
             clearCart();
             toast.success('Order Placed Successfully!');

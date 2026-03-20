@@ -29,7 +29,7 @@ const ConsultationPage = () => {
 
     const fetchConsultations = async () => {
         try {
-            const { data } = await axios.get('http://localhost:5000/api/consultations/myconsultations', config);
+            const { data } = await axios.get('/api/consultations/myconsultations', config);
             setConsultations(data);
         } catch (error) {
             console.error(error);
@@ -42,7 +42,7 @@ const ConsultationPage = () => {
     const fetchSlots = async (selectedDate) => {
         setSlotsLoading(true);
         try {
-            const { data } = await axios.get(`http://localhost:5000/api/slots/available/${selectedDate}`, config);
+            const { data } = await axios.get(`/api/slots/available/${selectedDate}`, config);
             setSlots(data);
         } catch (error) {
             toast.error('Failed to load slots');
@@ -70,7 +70,7 @@ const ConsultationPage = () => {
 
         try {
             await axios.post(
-                'http://localhost:5000/api/consultations',
+                '/api/consultations',
                 {
                     date,
                     time: selectedSlot.time,
@@ -94,7 +94,7 @@ const ConsultationPage = () => {
 
     const cancelConsultation = async (id) => {
         try {
-            await axios.put(`http://localhost:5000/api/consultations/${id}/cancel`, {}, config);
+            await axios.put(`/api/consultations/${id}/cancel`, {}, config);
             toast.success('Consultation cancelled');
             setConfirmCancel(null);
             fetchConsultations();

@@ -21,7 +21,7 @@ const AdminOrderDetailPage = () => {
 
     const fetchOrder = async () => {
         try {
-            const { data } = await axios.get(`http://localhost:5000/api/orders/${id}`, config);
+            const { data } = await axios.get(`/api/orders/${id}`, config);
             setOrder(data);
         } catch (error) {
             console.error(error);
@@ -41,7 +41,7 @@ const AdminOrderDetailPage = () => {
     const shipHandler = async () => {
         if (!window.confirm('Mark as shipped?')) return;
         try {
-            await axios.put(`http://localhost:5000/api/orders/${id}/ship`, {}, config);
+            await axios.put(`/api/orders/${id}/ship`, {}, config);
             toast.success('Order marked as shipped');
             fetchOrder();
         } catch (error) {
@@ -52,7 +52,7 @@ const AdminOrderDetailPage = () => {
     const cancelHandler = async () => {
         if (!window.confirm('Cancel this order?')) return;
         try {
-            await axios.put(`http://localhost:5000/api/orders/${id}/cancel`, {}, config);
+            await axios.put(`/api/orders/${id}/cancel`, {}, config);
             toast.success('Order cancelled');
             fetchOrder();
         } catch (error) {
@@ -62,7 +62,7 @@ const AdminOrderDetailPage = () => {
 
     const deliverHandler = async () => {
         try {
-            await axios.put(`http://localhost:5000/api/orders/${id}/deliver`, {}, config);
+            await axios.put(`/api/orders/${id}/deliver`, {}, config);
             toast.success('Order marked as delivered');
             fetchOrder();
         } catch (error) {

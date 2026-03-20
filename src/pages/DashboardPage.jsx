@@ -33,20 +33,20 @@ const DashboardPage = () => {
                     headers: { Authorization: `Bearer ${user.token}` },
                 };
 
-                const { data: myOrders } = await axios.get('http://localhost:5000/api/orders/myorders', config);
+                const { data: myOrders } = await axios.get('/api/orders/myorders', config);
                 setOrders(myOrders);
 
-                const { data: userConsulls } = await axios.get('http://localhost:5000/api/consultations/myconsultations', config);
+                const { data: userConsulls } = await axios.get('/api/consultations/myconsultations', config);
                 setMyConsultations(userConsulls);
 
                 if (user.isAdmin) {
-                    const { data: adminOrders } = await axios.get('http://localhost:5000/api/orders', config);
+                    const { data: adminOrders } = await axios.get('/api/orders', config);
                     setAllOrders(adminOrders);
 
-                    const { data: adminConsultations } = await axios.get('http://localhost:5000/api/consultations', config);
+                    const { data: adminConsultations } = await axios.get('/api/consultations', config);
                     setAllConsultations(adminConsultations);
 
-                    const { data: adminStats } = await axios.get('http://localhost:5000/api/admin/stats', config);
+                    const { data: adminStats } = await axios.get('/api/admin/stats', config);
                     setStats(adminStats);
                 }
 

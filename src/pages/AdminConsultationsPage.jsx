@@ -39,7 +39,7 @@ const AdminConsultationsPage = () => {
 
     const fetchConsultations = async () => {
         try {
-            const { data } = await axios.get('http://localhost:5000/api/consultations', config);
+            const { data } = await axios.get('/api/consultations', config);
             setConsultations(data);
         } catch (error) {
             toast.error('Failed to load consultations');
@@ -51,7 +51,7 @@ const AdminConsultationsPage = () => {
     const fetchSlots = async () => {
         setSlotsLoading(true);
         try {
-            const { data } = await axios.get('http://localhost:5000/api/slots', config);
+            const { data } = await axios.get('/api/slots', config);
             setSlots(data);
         } catch (error) {
             toast.error('Failed to load slots');
@@ -80,7 +80,7 @@ const AdminConsultationsPage = () => {
 
         setSlotActionLoading(true);
         try {
-            await axios.post('http://localhost:5000/api/slots', { date: slotDate, time: slotTime }, config);
+            await axios.post('/api/slots', { date: slotDate, time: slotTime }, config);
             toast.success('Slot added successfully');
             setSlotTime('');
             fetchSlots();
@@ -95,7 +95,7 @@ const AdminConsultationsPage = () => {
         if (!window.confirm('Are you sure you want to delete this slot?')) return;
 
         try {
-            await axios.delete(`http://localhost:5000/api/slots/${id}`, config);
+            await axios.delete(`/api/slots/${id}`, config);
             toast.success('Slot deleted');
             fetchSlots();
         } catch (error) {
@@ -106,7 +106,7 @@ const AdminConsultationsPage = () => {
     const updateStatus = async (id, status) => {
         setActionLoading(id + status);
         try {
-            await axios.put(`http://localhost:5000/api/consultations/${id}`, { status }, config);
+            await axios.put(`/api/consultations/${id}`, { status }, config);
             toast.success(`Consultation marked as ${status}`);
             fetchConsultations();
         } catch (error) {
@@ -119,7 +119,7 @@ const AdminConsultationsPage = () => {
     const deleteConsultation = async (id) => {
         setActionLoading(id + 'delete');
         try {
-            await axios.delete(`http://localhost:5000/api/consultations/${id}`, config);
+            await axios.delete(`/api/consultations/${id}`, config);
             toast.success('Consultation deleted');
             setConfirmDelete(null);
             fetchConsultations();

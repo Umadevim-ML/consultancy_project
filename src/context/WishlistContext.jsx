@@ -24,7 +24,7 @@ export const WishlistProvider = ({ children }) => {
         }
         setLoading(true);
         try {
-            const { data } = await axios.get('http://localhost:5000/api/wishlist', config);
+            const { data } = await axios.get('/api/wishlist', config);
             setWishlist(data);
         } catch (error) {
             console.error('Error fetching wishlist:', error);
@@ -43,7 +43,7 @@ export const WishlistProvider = ({ children }) => {
             return;
         }
         try {
-            const { data } = await axios.post(`http://localhost:5000/api/wishlist/${productId}`, {}, config);
+            const { data } = await axios.post(`/api/wishlist/${productId}`, {}, config);
             setWishlist(data.wishlist);
             toast.success('Added to wishlist');
             // Refresh to get populated list
@@ -56,7 +56,7 @@ export const WishlistProvider = ({ children }) => {
     const removeFromWishlist = async (productId) => {
         if (!user) return;
         try {
-            const { data } = await axios.delete(`http://localhost:5000/api/wishlist/${productId}`, config);
+            const { data } = await axios.delete(`/api/wishlist/${productId}`, config);
             setWishlist(data.wishlist);
             toast.success('Removed from wishlist');
             // Refresh to get populated list

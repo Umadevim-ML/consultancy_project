@@ -20,7 +20,7 @@ const AdminOrdersPage = () => {
 
     const fetchOrders = async () => {
         try {
-            const { data } = await axios.get('http://localhost:5000/api/orders', config);
+            const { data } = await axios.get('/api/orders', config);
             setOrders(data);
         } catch (error) {
             console.error(error);
@@ -40,7 +40,7 @@ const AdminOrdersPage = () => {
     const shipHandler = async (orderId) => {
         if (!window.confirm('Mark this order as shipped?')) return;
         try {
-            await axios.put(`http://localhost:5000/api/orders/${orderId}/ship`, {}, config);
+            await axios.put(`/api/orders/${orderId}/ship`, {}, config);
             toast.success('Order marked as shipped');
             fetchOrders();
         } catch (error) {
@@ -51,7 +51,7 @@ const AdminOrdersPage = () => {
     const cancelHandler = async (orderId) => {
         if (!window.confirm('Are you sure you want to cancel this order? Stock will be restored.')) return;
         try {
-            await axios.put(`http://localhost:5000/api/orders/${orderId}/cancel`, {}, config);
+            await axios.put(`/api/orders/${orderId}/cancel`, {}, config);
             toast.success('Order cancelled');
             fetchOrders();
         } catch (error) {
@@ -62,7 +62,7 @@ const AdminOrdersPage = () => {
     const deliverHandler = async (orderId) => {
         try {
             await axios.put(
-                `http://localhost:5000/api/orders/${orderId}/deliver`,
+                `/api/orders/${orderId}/deliver`,
                 {},
                 config
             );

@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
             };
 
             const { data } = await axios.post(
-                'http://localhost:5000/api/auth/login',
+                '/api/auth/login',
                 { email, password },
                 config
             );
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
             };
 
             const { data } = await axios.post(
-                'http://localhost:5000/api/auth/register',
+                '/api/auth/register',
                 { name, email, password },
                 config
             );

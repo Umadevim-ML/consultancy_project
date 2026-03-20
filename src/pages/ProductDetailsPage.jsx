@@ -23,7 +23,7 @@ const ProductDetailsPage = () => {
 
     useEffect(() => {
         const fetchProduct = async () => {
-            const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+            const { data } = await axios.get(`/api/products/${id}`);
             setProduct(data);
         };
         fetchProduct();
@@ -39,13 +39,13 @@ const ProductDetailsPage = () => {
                 },
             };
             await axios.post(
-                `http://localhost:5000/api/products/${id}/reviews`,
+                `/api/products/${id}/reviews`,
                 { rating, comment },
                 config
             );
             toast.success('Review Submitted!');
             // Reload product to show new review
-            const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+            const { data } = await axios.get(`/api/products/${id}`);
             setProduct(data);
             setComment('');
         } catch (error) {

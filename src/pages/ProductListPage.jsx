@@ -9,7 +9,7 @@ const ProductListPage = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const { data } = await axios.get(`http://localhost:5000/api/products?keyword=${keyword}`);
+            const { data } = await axios.get(`/api/products?keyword=${keyword}`);
             setProducts(data);
         };
         fetchProducts();

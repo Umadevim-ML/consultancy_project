@@ -42,7 +42,7 @@ const AdminProductEditPage = () => {
         if (!isCreate) {
             const fetchProduct = async () => {
                 try {
-                    const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+                    const { data } = await axios.get(`/api/products/${id}`);
                     setFormData({
                         name: data.name,
                         price: data.price,
@@ -87,11 +87,11 @@ const AdminProductEditPage = () => {
 
         try {
             if (isCreate) {
-                await axios.post('http://localhost:5000/api/products', productData, config);
+                await axios.post('/api/products', productData, config);
                 toast.success('Product created successfully!');
                 setTimeout(() => navigate('/admin/products'), 1500);
             } else {
-                await axios.put(`http://localhost:5000/api/products/${id}`, productData, config);
+                await axios.put(`/api/products/${id}`, productData, config);
                 toast.success('Product updated successfully!');
                 setTimeout(() => navigate('/admin/products'), 1500);
             }

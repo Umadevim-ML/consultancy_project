@@ -21,7 +21,7 @@ const OrderDetailsPage = () => {
     useEffect(() => {
         const fetchOrder = async () => {
             try {
-                const { data } = await axios.get(`http://localhost:5000/api/orders/${id}`, config);
+                const { data } = await axios.get(`/api/orders/${id}`, config);
                 setOrder(data);
             } catch (error) {
                 console.error(error);

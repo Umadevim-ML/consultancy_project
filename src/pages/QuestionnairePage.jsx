@@ -46,7 +46,7 @@ const QuestionnairePage = () => {
             };
 
             const { data } = await axios.post(
-                'http://localhost:5000/api/recommendations',
+                '/api/recommendations',
                 {
                     ...formData,
                     age: Number(formData.age),
