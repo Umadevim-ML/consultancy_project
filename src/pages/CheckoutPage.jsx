@@ -34,7 +34,14 @@ const CheckoutPage = () => {
             };
 
             const order = {
-                orderItems: cartItems,
+                orderItems: cartItems.map(item => ({
+                    name: item.name,
+                    qty: item.qty,
+                    image: item.image,
+                    price: item.price,
+                    size: item.size,
+                    product: item.product,   // ObjectId string
+                })),
                 shippingAddress: { address, city, postalCode, country },
                 paymentMethod,
                 mobileNumber,
@@ -50,8 +57,8 @@ const CheckoutPage = () => {
             toast.success('Order Placed Successfully!');
             navigate('/');
         } catch (error) {
-            console.error(error);
-            toast.error('Error placing order');
+            console.error('Order error:', error.response?.data || error.message);
+            toast.error(error.response?.data?.message || 'Error placing order');
         }
     };
 
