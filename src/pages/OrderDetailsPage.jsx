@@ -99,6 +99,7 @@ const OrderDetailsPage = () => {
                         </div>
                         <div className="p-6">
                             <p className="text-gray-700 font-medium">{user.name}</p>
+                            <p className="text-gray-500 text-sm">📞 {order.mobileNumber || 'N/A'}</p>
                             <p className="text-gray-600 mt-2">{order.shippingAddress.address}</p>
                             <p className="text-gray-600">{order.shippingAddress.city}, {order.shippingAddress.postalCode}</p>
                             <p className="text-gray-600">{order.shippingAddress.country}</p>

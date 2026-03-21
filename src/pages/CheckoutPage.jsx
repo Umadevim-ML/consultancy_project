@@ -15,7 +15,8 @@ const CheckoutPage = () => {
     const [city, setCity] = useState('');
     const [postalCode, setPostalCode] = useState('');
     const [country, setCountry] = useState('');
-    const [paymentMethod, setPaymentMethod] = useState('PayPal'); // Mock payment
+    const [mobileNumber, setMobileNumber] = useState('');
+    const paymentMethod = 'Cash on Delivery';
 
     const itemsPrice = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
     const shippingPrice = itemsPrice > 1000 ? 0 : 50;
@@ -36,6 +37,7 @@ const CheckoutPage = () => {
                 orderItems: cartItems,
                 shippingAddress: { address, city, postalCode, country },
                 paymentMethod,
+                mobileNumber,
                 itemsPrice,
                 shippingPrice,
                 taxPrice,
@@ -46,7 +48,7 @@ const CheckoutPage = () => {
 
             clearCart();
             toast.success('Order Placed Successfully!');
-            navigate('/'); // Navigate to Dashboard or Home
+            navigate('/');
         } catch (error) {
             console.error(error);
             toast.error('Error placing order');
@@ -58,38 +60,65 @@ const CheckoutPage = () => {
             <h1 className="text-3xl font-bold mb-6 text-center">Checkout</h1>
             <div className="bg-white p-8 rounded shadow-md">
                 <form onSubmit={submitHandler}>
+
+                    {/* Shipping Address */}
                     <h2 className="text-xl font-semibold mb-4">Shipping Address</h2>
                     <div className="grid grid-cols-1 gap-4 mb-6">
-                        <input type="text" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} className="border p-2 rounded" required />
-                        <input type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} className="border p-2 rounded" required />
-                        <input type="text" placeholder="Postal Code" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} className="border p-2 rounded" required />
-                        <input type="text" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} className="border p-2 rounded" required />
+                        <input
+                            type="text"
+                            placeholder="Address"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            className="border p-2 rounded"
+                            required
+                        />
+                        <input
+                            type="text"
+                            placeholder="City"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                            className="border p-2 rounded"
+                            required
+                        />
+                        <input
+                            type="text"
+                            placeholder="Postal Code"
+                            value={postalCode}
+                            onChange={(e) => setPostalCode(e.target.value)}
+                            className="border p-2 rounded"
+                            required
+                        />
+                        <input
+                            type="text"
+                            placeholder="Country"
+                            value={country}
+                            onChange={(e) => setCountry(e.target.value)}
+                            className="border p-2 rounded"
+                            required
+                        />
+                        <input
+                            type="tel"
+                            placeholder="Mobile Number (e.g. +91 9876543210)"
+                            value={mobileNumber}
+                            onChange={(e) => setMobileNumber(e.target.value)}
+                            className="border p-2 rounded"
+                            pattern="[0-9+\s\-]{7,15}"
+                            title="Please enter a valid mobile number"
+                            required
+                        />
                     </div>
 
+                    {/* Payment Method — Cash on Delivery only */}
                     <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
-                    <div className="mb-6">
-                        <label className="flex items-center">
-                            <input
-                                type="radio"
-                                value="Pay On Delivery" // Changed to POD for simplicity
-                                checked={paymentMethod === 'Pay On Delivery'}
-                                onChange={(e) => setPaymentMethod(e.target.value)}
-                                className="mr-2"
-                            />
-                            Pay On Delivery
-                        </label>
-                        <label className="flex items-center mt-2">
-                            <input
-                                type="radio"
-                                value="PayPal"
-                                checked={paymentMethod === 'PayPal'}
-                                onChange={(e) => setPaymentMethod(e.target.value)}
-                                className="mr-2"
-                            />
-                            PayPal / Credit Card (Mock)
-                        </label>
+                    <div className="mb-6 p-3 bg-green-50 border border-green-200 rounded-lg flex items-center gap-3">
+                        <span className="text-2xl">💵</span>
+                        <div>
+                            <p className="font-bold text-green-800">Cash on Delivery</p>
+                            <p className="text-sm text-green-600">Pay when your order arrives at your door.</p>
+                        </div>
                     </div>
 
+                    {/* Price Summary */}
                     <div className="border-t pt-4">
                         <div className="flex justify-between mb-2"><span>Items</span><span>₹{itemsPrice.toFixed(2)}</span></div>
                         <div className="flex justify-between mb-2"><span>Shipping</span><span>₹{shippingPrice.toFixed(2)}</span></div>

@@ -131,6 +131,7 @@ const AdminOrderDetailPage = () => {
                     <div className="space-y-2 text-sm">
                         <p><strong>Name:</strong> {order.user?.name || 'N/A'}</p>
                         <p><strong>Email:</strong> {order.user?.email || 'N/A'}</p>
+                        <p><strong>Mobile:</strong> {order.mobileNumber || 'N/A'}</p>
                     </div>
                 </div>
 
