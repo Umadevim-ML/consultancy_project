@@ -7,8 +7,14 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      '/api': 'http://localhost:5000',
-      '/uploads': 'http://localhost:5000',
+      '/api': {
+        target: 'https://consultancy-project-backend-syz3.onrender.com',
+        changeOrigin: true,
+      },
+      '/uploads': {
+        target: 'https://consultancy-project-backend-syz3.onrender.com',
+        changeOrigin: true,
+      },
     }
   }
 })
