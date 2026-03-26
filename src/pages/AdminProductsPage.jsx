@@ -79,16 +79,22 @@ const AdminProductsPage = () => {
     };
 
     const updateDiscountHandler = async (id, discount) => {
+        const discountValue = Number(discount);
+        if (discountValue < 0 || discountValue > 100) {
+            toast.error('Discount must be between 0 and 100');
+            fetchProducts(); // Refresh to reset input value
+            return;
+        }
         try {
             await axios.patch(
                 `/api/products/${id}/discount`,
-                { discount: Number(discount) },
+                { discount: discountValue },
                 config
             );
             toast.success('Discount updated');
             fetchProducts();
         } catch (error) {
-            toast.error('Error updating discount');
+            toast.error(error.response?.data?.message || 'Error updating discount');
         }
     };
 

@@ -10,7 +10,10 @@ const CartPage = () => {
     const { user } = useContext(AuthContext); // Added
     const navigate = useNavigate();
 
-    const subtotal = cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2);
+    const subtotal = cartItems.reduce((acc, item) => {
+        const finalPrice = item.discount > 0 ? item.price * (1 - item.discount / 100) : item.price;
+        return acc + item.qty * finalPrice;
+    }, 0).toFixed(2);
 
     const checkoutHandler = () => {
         if (!user) { // Added
@@ -30,14 +33,25 @@ const CartPage = () => {
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="md:col-span-2 space-y-4">
-                        {cartItems.map((item) => (
-                            <div key={item.product} className="flex items-center justify-between bg-white p-4 rounded shadow-sm">
-                                <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded" />
-                                <div className="flex-grow ml-4">
-                                    <Link to={`/product/${item.product}`} className="text-lg font-bold hover:underline">{item.name}</Link>
-                                    <p className="text-gray-600">₹{item.price}</p>
-                                    <p className="text-sm text-gray-500">Size: {item.size}</p>
-                                </div>
+                        {cartItems.map((item) => {
+                            const finalPrice = item.discount > 0 ? item.price * (1 - item.discount / 100) : item.price;
+                            return (
+                                <div key={item.product} className="flex items-center justify-between bg-white p-4 rounded shadow-sm">
+                                    <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded" />
+                                    <div className="flex-grow ml-4">
+                                        <Link to={`/product/${item.product}`} className="text-lg font-bold hover:underline">{item.name}</Link>
+                                        <p className="text-gray-600">
+                                            {item.discount > 0 ? (
+                                                <>
+                                                    <span className="line-through text-gray-400 mr-2">₹{item.price.toFixed(2)}</span>
+                                                    <span className="font-bold text-green-600">₹{finalPrice.toFixed(2)}</span>
+                                                </>
+                                            ) : (
+                                                `₹${item.price.toFixed(2)}`
+                                            )}
+                                        </p>
+                                        <p className="text-sm text-gray-500">Size: {item.size}</p>
+                                    </div>
                                 <div className="flex items-center">
                                     <span className="mr-4 font-bold">Qty: {item.qty}</span>
                                     <button
@@ -48,7 +62,8 @@ const CartPage = () => {
                                     </button>
                                 </div>
                             </div>
-                        ))}
+                            );
+                        })}
                     </div>
                     <div className="md:col-span-1">
                         <div className="bg-white p-6 rounded shadow-md">
