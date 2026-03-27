@@ -78,8 +78,13 @@ export const AuthProvider = ({ children }) => {
         toast.success('Logged out successfully');
     };
 
+    const updateUser = (updatedUserInfo) => {
+        setUser(updatedUserInfo);
+        localStorage.setItem('userInfo', JSON.stringify(updatedUserInfo));
+    };
+
     return (
-        <AuthContext.Provider value={{ user, login, register, logout, loading, error }}>
+        <AuthContext.Provider value={{ user, login, register, logout, updateUser, loading, error }}>
             {children}
         </AuthContext.Provider>
     );

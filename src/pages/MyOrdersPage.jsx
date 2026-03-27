@@ -71,7 +71,7 @@ const MyOrdersPage = () => {
                                 <div className="flex-1">
                                     <div className="flex flex-wrap items-center gap-3 mb-4">
                                         <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">
-                                            Order #{order._id.substring(order._id.length - 8)}
+                                            Order Confirmed
                                         </span>
                                         <span className="flex items-center gap-1.5 text-gray-500 text-sm font-medium">
                                             <FaCalendarDay className="opacity-50" />

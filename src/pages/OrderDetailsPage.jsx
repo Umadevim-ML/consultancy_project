@@ -65,7 +65,6 @@ const OrderDetailsPage = () => {
                     <h1 className="text-3xl font-black text-gray-900 flex items-center gap-3">
                         <FaBox className="text-blue-600" /> Order Details
                     </h1>
-                    <p className="text-gray-500 font-mono mt-1">ID: {order._id}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
                     {order.isCancelled ? (
