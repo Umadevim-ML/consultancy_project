@@ -30,12 +30,8 @@ const AdminOrdersPage = () => {
     };
 
     useEffect(() => {
-        if (!user || !user.isAdmin) {
-            navigate('/login');
-            return;
-        }
         fetchOrders();
-    }, [user, navigate]);
+    }, []);
 
     const shipHandler = async (orderId) => {
         if (!window.confirm('Mark this order as shipped?')) return;

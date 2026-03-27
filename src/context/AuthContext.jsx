@@ -16,6 +16,20 @@ export const AuthProvider = ({ children }) => {
             setUser(userInfo);
         }
         setLoading(false);
+
+        // Axios Interceptor for 401 handling
+        const interceptor = axios.interceptors.response.use(
+            (response) => response,
+            (error) => {
+                if (error.response && error.response.status === 401) {
+                    logout();
+                    toast.error('Session expired. Please log in again.');
+                }
+                return Promise.reject(error);
+            }
+        );
+
+        return () => axios.interceptors.response.eject(interceptor);
     }, []);
 
     const login = async (email, password) => {

@@ -34,11 +34,6 @@ const AdminProductEditPage = () => {
     };
 
     useEffect(() => {
-        if (!user || !user.isAdmin) {
-            navigate('/login');
-            return;
-        }
-
         if (!isCreate) {
             const fetchProduct = async () => {
                 try {

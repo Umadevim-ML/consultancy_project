@@ -31,12 +31,13 @@ const AdminProductsPage = () => {
     };
 
     useEffect(() => {
+        if (authLoading) return;
         if (!user || !user.isAdmin) {
             navigate('/login');
             return;
         }
         fetchProducts();
-    }, [user, navigate]);
+    }, [user, navigate, authLoading]);
 
     const deleteHandler = async (id) => {
         if (window.confirm('Are you sure you want to delete this product?')) {
